@@ -14,13 +14,20 @@ class MainViewController: UIViewController {
     @IBOutlet weak var idTextField: UITextField!
     @IBOutlet weak var passTextField: UITextField!
     
-    
     @IBAction func logOnButtonPressed(_ sender: Any) {
-        if idTextField.text == "admin",
-            passTextField.text == "admin" {
-            print("Успешный вход.")
+        if idTextField.text == "",
+            passTextField.text == "" {
+            performSegue(withIdentifier: "ShowTabBarController", sender: nil)
+            //print("Успешный вход.")
         } else {
-            print("Неверный логин или пароль.")
+            let alert = UIAlertController(title: "В доступе отказано", message: "Неверный логин или пароль", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default) { _ in
+                self.passTextField.text = ""
+            }
+            
+            alert.addAction(action)
+            present(alert, animated: true)
+            //print("Неверный логин или пароль.")
         }
     }
     
