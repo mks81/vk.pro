@@ -8,6 +8,10 @@
 
 import UIKit
 
-class PhotoCollectionViewCell: UICollectionViewCell {
+class PhotoCell: UICollectionViewCell {
+    
+    static let reuseId = "PhotoCell"
+    
+    @IBOutlet weak var photo: UIImageView!
     
 }

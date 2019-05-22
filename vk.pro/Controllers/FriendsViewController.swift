@@ -9,6 +9,13 @@
 import UIKit
 
 class FriendsViewController: UITableViewController {
+    
+    var friends: [UserModel] = [
+        UserModel(name: "1"),
+        UserModel(name: "2"),
+        UserModel(name: "3"),
+        UserModel(name: "4")
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +35,13 @@ class FriendsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        return friends.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.reuseId, for: indexPath) as? UserCell else { return UITableViewCell() }
 
-        // Configure the cell...
+        cell.name.text = friends[indexPath.row].name
 
         return cell
     }
