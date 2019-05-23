@@ -11,15 +11,15 @@ import UIKit
 class GroupViewController: UITableViewController {
 
     var groups: [GroupModel] = [
-        GroupModel(name: "1", photo: "photo"),
-        GroupModel(name: "2", photo: "photo"),
-        GroupModel(name: "3", photo: "photo"),
-        GroupModel(name: "4", photo: "photo")
+        GroupModel(name: "iOS dev.", photo: "ios"),
+        GroupModel(name: "Новости", photo: "news"),
+        GroupModel(name: "/dev/null", photo: "dev"),
+        GroupModel(name: "Книга рекордов", photo: "book")
     ]
     
     @IBAction func unwindToGroup(unwindSeque: UIStoryboardSegue) {
         //tableView.reloadData()
-        tableView.insertRows(at: [IndexPath(item: groups.count - 1, section: 0)], with: .automatic)
+        //tableView.insertRows(at: [IndexPath(item: groups.count - 1, section: 0)], with: .automatic)
     }
     
     
@@ -49,6 +49,7 @@ class GroupViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupCell.reuseId, for: indexPath) as? GroupCell else { return UITableViewCell() }
 
         cell.name.text = groups[indexPath.row].name
+        cell.photo.image = UIImage(named: groups[indexPath.row].photo)
 
         return cell
     }

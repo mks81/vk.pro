@@ -11,10 +11,11 @@ import UIKit
 class FindGroupViewController: UITableViewController {
     
     var groups: [GroupModel] = [
-        GroupModel(name: "1"),
-        GroupModel(name: "2"),
-        GroupModel(name: "3"),
-        GroupModel(name: "4")
+        GroupModel(name: "Клопс", photo: "klops"),
+        GroupModel(name: "ЯПлакаль!", photo: "yap"),
+        GroupModel(name: "Рыбалка в Калининграде", photo: "fish"),
+        GroupModel(name: "СПОРТ - ЭТО ЖИЗНЬ", photo: "sport"),
+        GroupModel(name: "Английский для лентяев", photo: "english")
     ]
 
     override func viewDidLoad() {
@@ -43,6 +44,7 @@ class FindGroupViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupCell.reuseId, for: indexPath) as? GroupCell else { return UITableViewCell() }
 
         cell.name.text = groups[indexPath.row].name
+        cell.photo.image = UIImage(named: groups[indexPath.row].photo)
 
         return cell
     }
@@ -83,16 +85,18 @@ class FindGroupViewController: UITableViewController {
     */
 
     
-    // MARK: - Navigation
+    //MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "UnwindToGroupSegue",
             let groupController = segue.destination as? GroupViewController,
             let cell = sender as? GroupCell,
-            let indexPath = tableView.indexPath(for: cell) {
+            let indexPath = tableView.indexPath(for: cell),
+            !groupController.groups.contains(where: { $0.name == cell.name.text }) {
             
             groupController.groups.append(groups[indexPath.row])
+            groupController.tableView.insertRows(at: [IndexPath(item: groupController.groups.count - 1, section: 0)], with: .automatic)
         }
     }
  
