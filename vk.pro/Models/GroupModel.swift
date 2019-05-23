@@ -10,4 +10,5 @@ import Foundation
 
 struct GroupModel {
     var name: String
+    var photo: String
 }

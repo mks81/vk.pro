@@ -11,11 +11,17 @@ import UIKit
 class GroupViewController: UITableViewController {
 
     var groups: [GroupModel] = [
-        GroupModel(name: "1"),
-        GroupModel(name: "2"),
-        GroupModel(name: "3"),
-        GroupModel(name: "4")
+        GroupModel(name: "1", photo: "photo"),
+        GroupModel(name: "2", photo: "photo"),
+        GroupModel(name: "3", photo: "photo"),
+        GroupModel(name: "4", photo: "photo")
     ]
+    
+    @IBAction func unwindToGroup(unwindSeque: UIStoryboardSegue) {
+        //tableView.reloadData()
+        tableView.insertRows(at: [IndexPath(item: groups.count - 1, section: 0)], with: .automatic)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

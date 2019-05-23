@@ -82,14 +82,18 @@ class FindGroupViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "UnwindToGroupSegue",
+            let groupController = segue.destination as? GroupViewController,
+            let cell = sender as? GroupCell,
+            let indexPath = tableView.indexPath(for: cell) {
+            
+            groupController.groups.append(groups[indexPath.row])
+        }
     }
-    */
-
+ 
 }

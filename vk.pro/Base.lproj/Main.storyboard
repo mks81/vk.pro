@@ -331,6 +331,7 @@
                                 <connections>
                                     <outlet property="name" destination="UV8-sL-lda" id="KJf-VQ-OP6"/>
                                     <outlet property="photo" destination="V1n-up-e5b" id="5dB-7e-5Pp"/>
+                                    <segue destination="bYd-IK-oTJ" kind="unwind" identifier="UnwindToGroupSegue" unwindAction="unwindToGroupWithUnwindSeque:" id="0q8-wd-gGv"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -341,6 +342,7 @@
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6P0-WI-89L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bYd-IK-oTJ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1254" y="321"/>
         </scene>
