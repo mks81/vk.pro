@@ -9,6 +9,12 @@
 import UIKit
 
 class FriendsViewController: UITableViewController {
+    
+    var friends: [UserModel] = [
+        UserModel(name: "Виталий Бутерин", photo: "buterin"),
+        UserModel(name: "Elon Musk", photo: "musk"),
+        UserModel(name: "Павел Дуров", photo: "durov")
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,14 +34,14 @@ class FriendsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 1
+        return friends.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.reuseId, for: indexPath) as? UserCell else { return UITableViewCell() }
 
-        // Configure the cell...
+        cell.name.text = friends[indexPath.row].name
+        cell.photo.image = UIImage(named: friends[indexPath.row].photo)
 
         return cell
     }
@@ -75,14 +81,18 @@ class FriendsViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        let photoController = segue.destination as! PhotoViewController
+        let cell = sender as! UserCell
+        let indexPath = tableView.indexPath(for: cell)
+        photoController.photo = friends[indexPath!.row].photo
+    
     }
-    */
+    
 
 }

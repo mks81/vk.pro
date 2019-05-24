@@ -8,7 +8,12 @@
 
 import UIKit
 
-class GroupTableViewCell: UITableViewCell {
+class GroupCell: UITableViewCell {
+    
+    static let reuseId = "GroupCell"
+    
+    @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var name: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

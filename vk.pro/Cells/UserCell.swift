@@ -1,5 +1,5 @@
 //
-//  FindGroupTableViewCell.swift
+//  FriendTableViewCell.swift
 //  vk.pro
 //
 //  Created by Konstantin Mikhailov on 18/05/2019.
@@ -8,7 +8,12 @@
 
 import UIKit
 
-class FindGroupTableViewCell: UITableViewCell {
+class UserCell: UITableViewCell {
+    
+    static let reuseId = "UserCell"
+    
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var photo: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
