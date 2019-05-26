@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		050555B422973200002B0575 /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050555B322973200002B0575 /* PhotoViewController.swift */; };
 		050555B62297327C002B0575 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050555B52297327C002B0575 /* PhotoCell.swift */; };
+		050555BB229A975B002B0575 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050555BA229A975B002B0575 /* AvatarView.swift */; };
+		050555BF229AF5C9002B0575 /* Likes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050555BE229AF5C9002B0575 /* Likes.swift */; };
 		0520C9EA2290113800C04D76 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0520C9E92290113800C04D76 /* FriendsViewController.swift */; };
 		0520C9EC2290129900C04D76 /* GroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0520C9EB2290129900C04D76 /* GroupViewController.swift */; };
 		0520C9EF229018BF00C04D76 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0520C9EE229018BF00C04D76 /* UserCell.swift */; };
@@ -26,6 +28,8 @@
 /* Begin PBXFileReference section */
 		050555B322973200002B0575 /* PhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 		050555B52297327C002B0575 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		050555BA229A975B002B0575 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		050555BE229AF5C9002B0575 /* Likes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Likes.swift; sourceTree = "<group>"; };
 		0520C9E92290113800C04D76 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		0520C9EB2290129900C04D76 /* GroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupViewController.swift; sourceTree = "<group>"; };
 		0520C9EE229018BF00C04D76 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
@@ -53,6 +57,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		050555B9229A94FE002B0575 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				050555BA229A975B002B0575 /* AvatarView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0520C9ED229012B400C04D76 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				0589AA06228BF0FC00B04176 /* AppDelegate.swift */,
+				050555B9229A94FE002B0575 /* Views */,
 				059E19B52295275700651FF2 /* Models */,
 				0589AA0A228BF0FC00B04176 /* Main.storyboard */,
 				0520C9F2229019E200C04D76 /* Cells */,
@@ -102,6 +115,7 @@
 				0589AA0D228BF10100B04176 /* Assets.xcassets */,
 				0589AA0F228BF10100B04176 /* LaunchScreen.storyboard */,
 				0589AA12228BF10100B04176 /* Info.plist */,
+				050555BE229AF5C9002B0575 /* Likes.swift */,
 			);
 			path = vk.pro;
 			sourceTree = "<group>";
@@ -187,8 +201,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				059E19B4229526DF00651FF2 /* GroupModel.swift in Sources */,
+				050555BB229A975B002B0575 /* AvatarView.swift in Sources */,
 				059E19B72295283E00651FF2 /* UserModel.swift in Sources */,
 				0520C9EC2290129900C04D76 /* GroupViewController.swift in Sources */,
+				050555BF229AF5C9002B0575 /* Likes.swift in Sources */,
 				0589AA19228BF4C300B04176 /* MainViewController.swift in Sources */,
 				0520C9EF229018BF00C04D76 /* UserCell.swift in Sources */,
 				0520C9F1229018E500C04D76 /* GroupCell.swift in Sources */,
