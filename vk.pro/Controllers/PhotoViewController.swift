@@ -11,11 +11,11 @@ import UIKit
 private let reuseIdentifier = "PhotoCell"
 
 class PhotoViewController: UICollectionViewController {
+    
     var photo = ""
     
-    
     //@IBOutlet weak var collectionView: UICollectionView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -55,6 +55,9 @@ class PhotoViewController: UICollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
     
         cell.photo.image = UIImage(named: photo)
+        cell.likeLabel.text = String(cell.like)
+        cell.likeImageView.image = cell.liked ? UIImage(named: "like-filled") : UIImage(named: "like")
+        cell.likesControl.delegate = cell
     
         return cell
     }
