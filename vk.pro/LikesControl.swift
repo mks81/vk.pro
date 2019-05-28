@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol photoCellCommunicationDelegate: class {
+protocol PhotoCellCommunicationDelegate: class {
 
     func trackingEnded()
 }
@@ -16,7 +16,7 @@ protocol photoCellCommunicationDelegate: class {
 
 class LikesControl: UIControl {
     
-    weak var delegate: photoCellCommunicationDelegate?
+    weak var delegate: PhotoCellCommunicationDelegate?
     
     override func layoutSubviews() {
         alpha = 0.8

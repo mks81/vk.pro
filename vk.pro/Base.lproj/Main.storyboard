@@ -214,10 +214,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="410" height="366"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N1o-1v-cGu">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N1o-1v-cGu">
                                             <rect key="frame" x="0.0" y="0.0" width="410" height="366"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="py7-Jw-buu"/>
+                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="100" id="py7-Jw-buu"/>
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="r8u-ek-JZz" customClass="LikesControl" customModule="vk_pro" customModuleProvider="target">
@@ -257,6 +257,7 @@
                                     <constraint firstItem="r8u-ek-JZz" firstAttribute="leading" secondItem="WEF-Dm-3RQ" secondAttribute="leadingMargin" constant="5" id="cvM-0N-t0x"/>
                                     <constraint firstAttribute="trailing" secondItem="N1o-1v-cGu" secondAttribute="trailing" id="fA1-cp-QKZ"/>
                                     <constraint firstItem="N1o-1v-cGu" firstAttribute="leading" secondItem="WEF-Dm-3RQ" secondAttribute="leading" id="qqj-qD-40u"/>
+                                    <constraint firstItem="N1o-1v-cGu" firstAttribute="width" secondItem="WEF-Dm-3RQ" secondAttribute="width" id="r3i-PT-Vwe"/>
                                     <constraint firstAttribute="bottom" secondItem="N1o-1v-cGu" secondAttribute="bottom" id="riK-sh-fuC"/>
                                 </constraints>
                                 <connections>

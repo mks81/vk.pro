@@ -8,10 +8,10 @@
 
 import UIKit
 
-class PhotoCell: UICollectionViewCell, photoCellCommunicationDelegate {
+class PhotoCell: UICollectionViewCell, PhotoCellCommunicationDelegate {
     
     var like = Int.random(in: 0...100)
-    var liked = Bool.random()
+    var alreadyLiked = Bool.random()
     
     @IBOutlet weak var photo: UIImageView!
     @IBOutlet weak var likesControl: LikesControl!
@@ -19,7 +19,7 @@ class PhotoCell: UICollectionViewCell, photoCellCommunicationDelegate {
     @IBOutlet weak var likeImageView: UIImageView!
     
     func trackingEnded() {
-        if liked {
+        if alreadyLiked {
             likeImageView.image = UIImage(named: "like")
             like -= 1
             likeLabel.text = String(like)
@@ -28,7 +28,7 @@ class PhotoCell: UICollectionViewCell, photoCellCommunicationDelegate {
             like += 1
             likeLabel.text = String(like)
         }
-        liked = !liked
+        alreadyLiked = !alreadyLiked
     }
     
 }

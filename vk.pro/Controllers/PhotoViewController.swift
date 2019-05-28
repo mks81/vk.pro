@@ -56,7 +56,7 @@ class PhotoViewController: UICollectionViewController {
     
         cell.photo.image = UIImage(named: photo)
         cell.likeLabel.text = String(cell.like)
-        cell.likeImageView.image = cell.liked ? UIImage(named: "like-filled") : UIImage(named: "like")
+        cell.likeImageView.image = cell.alreadyLiked ? UIImage(named: "like-filled") : UIImage(named: "like")
         cell.likesControl.delegate = cell
     
         return cell
