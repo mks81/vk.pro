@@ -29,13 +29,12 @@ class LikesControl: UIControl {
         setup()
     }
     
-    
-    
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
-        let heartSize = rect.height
+        let heartSize = rect.height / 1.5
         let path = UIBezierPath()
+        path.lineWidth = 1
         let sideOne = heartSize * 0.4
         let sideTwo = heartSize * 0.3
         let arcRadius = sqrt(sideOne * sideOne + sideTwo * sideTwo) / 2
@@ -43,24 +42,26 @@ class LikesControl: UIControl {
         path.addArc(withCenter: CGPoint(x: heartSize * 0.7, y: heartSize * 0.35), radius: arcRadius, startAngle: 225.degreesToRadians, endAngle: 45.degreesToRadians, clockwise: true)
         path.addLine(to: CGPoint(x: heartSize * 0.5, y: heartSize * 0.95))
         path.close()
+        let move = (rect.height - heartSize) / 2
+        path.apply(CGAffineTransform(translationX: move, y: move))
         
         UIColor.red.setFill()
-        UIColor.red.setStroke()
-        
-        alreadyLiked ? path.fill() : path.stroke()
-        
-        
+        UIColor.white.setStroke()
+        //label.white
+        if alreadyLiked {
+            UIColor.red.setStroke()
+            path.fill()
+            //label.red
+        }
+        path.stroke()
 
     }
     
     func setup() {
         
         addTarget(self, action: #selector(changeState), for: .touchUpInside)
-        
-        alpha = 0.8
-        backgroundColor = .gray
-        //layer.borderWidth = 1
-        //layer.borderColor = UIColor.red.cgColor
+
+        backgroundColor = UIColor(red: 0, green: 128, blue: 128, alpha: 0.3)
         layer.cornerRadius = frame.height / 4
         clipsToBounds = true
     }
