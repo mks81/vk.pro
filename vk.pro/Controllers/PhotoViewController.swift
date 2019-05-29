@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "PhotoCell"
 
-class PhotoViewController: UICollectionViewController {
+class PhotoViewController: UICollectionViewController , UICollectionViewDelegateFlowLayout {
     
     var photo = ""
     
@@ -55,13 +55,21 @@ class PhotoViewController: UICollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
     
         cell.photo.image = UIImage(named: photo)
-        cell.likeLabel.text = String(cell.like)
-        cell.likeImageView.image = cell.alreadyLiked ? UIImage(named: "like-filled") : UIImage(named: "like")
-        cell.likesControl.delegate = cell
+        //cell.likeLabel.text = String(cell.like)
+        //cell.likeImageView.image = cell.alreadyLiked ? UIImage(named: "like-filled") : UIImage(named: "like")
     
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let frameWidth = collectionView.frame.width
+        let photoWidth = UIImage(named: photo)!.size.width
+        let photoHeight = UIImage(named:photo)!.size.height
+        let ratio = frameWidth / photoWidth
+        
+        return CGSize(width: frameWidth, height: photoHeight * ratio)
+    }
+    
     // MARK: UICollectionViewDelegate
 
     /*
