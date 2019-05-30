@@ -420,7 +420,7 @@
         <scene sceneID="vOH-gv-yYl">
             <objects>
                 <navigationController id="DG7-Eo-gVv" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Группы" id="ZZB-QG-I9K"/>
+                    <tabBarItem key="tabBarItem" title="Группы" image="group" landscapeImage="group" largeContentSizeImage="group" id="ZZB-QG-I9K"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MvU-nc-XRR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -437,7 +437,7 @@
         <scene sceneID="KeV-bf-Nxv">
             <objects>
                 <navigationController id="fSz-oM-9RH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Друзья" id="wPq-iI-B02"/>
+                    <tabBarItem key="tabBarItem" title="Друзья" image="friend" landscapeImage="friend" largeContentSizeImage="friend" id="wPq-iI-B02"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0V6-Ue-lhf">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -471,5 +471,7 @@
     </scenes>
     <resources>
         <image name="background" width="1600" height="1200"/>
+        <image name="friend" width="30" height="30"/>
+        <image name="group" width="30" height="30"/>
     </resources>
 </document>
