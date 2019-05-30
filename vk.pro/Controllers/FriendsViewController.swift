@@ -12,24 +12,12 @@ class FriendsViewController: UITableViewController {
 
     var friends: [UserModel] = [
         UserModel(name: "Виталий Бутерин", photo: "buterin"),
-        UserModel(name: "Виталий Бутерин", photo: "buterin"),
-        UserModel(name: "Виталий Бутерин", photo: "buterin"),
-        UserModel(name: "Виталий Бутерин", photo: "buterin"),
-        UserModel(name: "Виталий Бутерин", photo: "buterin"),
-        UserModel(name: "Elon Musk", photo: "musk"),
-        UserModel(name: "Elon Musk", photo: "musk"),
-        UserModel(name: "Elon Musk", photo: "musk"),
-        UserModel(name: "Elon Musk", photo: "musk"),
+        UserModel(name: "Владимир Доброжинский", photo: "vovan"),
+        UserModel(name: "Надежда Адаменко", photo: "nadya"),
+        UserModel(name: "Ирина Стирманова", photo: "ira"),
+        UserModel(name: "Денис Хрисанфов", photo: "den"),
         UserModel(name: "Elon Musk", photo: "musk"),
         UserModel(name: "Владимир Путин", photo: "putin"),
-        UserModel(name: "Владимир Путин", photo: "putin"),
-        UserModel(name: "Владимир Путин", photo: "putin"),
-        UserModel(name: "Владимир Путин", photo: "putin"),
-        UserModel(name: "Владимир Путин", photo: "putin"),
-        UserModel(name: "Павел Дуров", photo: "durov"),
-        UserModel(name: "Павел Дуров", photo: "durov"),
-        UserModel(name: "Павел Дуров", photo: "durov"),
-        UserModel(name: "Павел Дуров", photo: "durov"),
         UserModel(name: "Павел Дуров", photo: "durov")
         ].sorted(by: {$0.name < $1.name})
     
