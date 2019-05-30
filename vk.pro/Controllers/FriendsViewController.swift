@@ -18,6 +18,9 @@ class FriendsViewController: UITableViewController {
         UserModel(name: "Денис Хрисанфов", photo: "den"),
         UserModel(name: "Elon Musk", photo: "musk"),
         UserModel(name: "Владимир Путин", photo: "putin"),
+        UserModel(name: "Василий Жуков", photo: "vasek"),
+        UserModel(name: "Евгения Иванова", photo: "phuket"),
+        UserModel(name: "Роман Михайлов", photo: "roma"),
         UserModel(name: "Павел Дуров", photo: "durov")
         ].sorted(by: {$0.name < $1.name})
     
