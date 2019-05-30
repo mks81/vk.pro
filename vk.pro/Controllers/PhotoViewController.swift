@@ -55,8 +55,6 @@ class PhotoViewController: UICollectionViewController , UICollectionViewDelegate
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
     
         cell.photo.image = UIImage(named: photo)
-        //cell.likeLabel.text = String(cell.like)
-        //cell.likeImageView.image = cell.alreadyLiked ? UIImage(named: "like-filled") : UIImage(named: "like")
     
         return cell
     }

@@ -14,8 +14,10 @@ extension Int {
 
 class LikesControl: UIControl {
     
-    var alreadyLiked = false
-    var likesCount = 0
+    @IBOutlet weak var likeLebel: UILabel!
+    
+    var alreadyLiked = Bool.random()
+    var likesCount = Int.random(in: 0...99)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,14 +49,14 @@ class LikesControl: UIControl {
         
         UIColor.red.setFill()
         UIColor.white.setStroke()
-        //label.white
+        likeLebel.textColor = UIColor.white
+        likeLebel.text = String(likesCount)
         if alreadyLiked {
             UIColor.red.setStroke()
             path.fill()
-            //label.red
+            likeLebel.textColor = UIColor.red
         }
         path.stroke()
-
     }
     
     func setup() {
@@ -76,6 +78,9 @@ class LikesControl: UIControl {
         setNeedsDisplay()
     }
 
+    override func layoutSubviews() {
+        setNeedsDisplay()
+    }
     
     /*
     // Only override draw() if you perform custom drawing.

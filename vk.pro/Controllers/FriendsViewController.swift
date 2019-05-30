@@ -9,71 +9,85 @@
 import UIKit
 
 class FriendsViewController: UITableViewController {
-    
-    var index = 0
-    var rowsInSection: [Int] = Array()
-    var alphabet: [String] = Array()
+
     var friends: [UserModel] = [
         UserModel(name: "Виталий Бутерин", photo: "buterin"),
+        UserModel(name: "Виталий Бутерин", photo: "buterin"),
+        UserModel(name: "Виталий Бутерин", photo: "buterin"),
+        UserModel(name: "Виталий Бутерин", photo: "buterin"),
+        UserModel(name: "Виталий Бутерин", photo: "buterin"),
+        UserModel(name: "Elon Musk", photo: "musk"),
+        UserModel(name: "Elon Musk", photo: "musk"),
+        UserModel(name: "Elon Musk", photo: "musk"),
+        UserModel(name: "Elon Musk", photo: "musk"),
         UserModel(name: "Elon Musk", photo: "musk"),
         UserModel(name: "Владимир Путин", photo: "putin"),
+        UserModel(name: "Владимир Путин", photo: "putin"),
+        UserModel(name: "Владимир Путин", photo: "putin"),
+        UserModel(name: "Владимир Путин", photo: "putin"),
+        UserModel(name: "Владимир Путин", photo: "putin"),
+        UserModel(name: "Павел Дуров", photo: "durov"),
+        UserModel(name: "Павел Дуров", photo: "durov"),
+        UserModel(name: "Павел Дуров", photo: "durov"),
+        UserModel(name: "Павел Дуров", photo: "durov"),
         UserModel(name: "Павел Дуров", photo: "durov")
-    ].sorted(by: {$0.name < $1.name})
+        ].sorted(by: {$0.name < $1.name})
     
+    var titleForSection = [String]()
+    var items = [[UserModel]]()
 
-    func getTitles() {
-        alphabet.append(String(friends[0].name.first!))
-        var rowsCount = 1
-        for i in 1..<friends.count {
-            let leftValue = friends[i - 1].name.first
-            let rightValue = friends[i].name.first
+    func prepareData() {
+        var section = 0
+        titleForSection.append(String(friends[0].name.first!))
+        items.append([UserModel]())
+        items[section].append(friends[0])
+        
+        for row in 1..<friends.count {
+            let leftValue = friends[row - 1].name.first
+            let rightValue = friends[row].name.first
             if leftValue == rightValue {
-                rowsCount += 1
-                continue
+                items[section].append(friends[row])
+            } else {
+                titleForSection.append(String(rightValue!))
+                section += 1
+                items.append([UserModel]())
+                items[section].append(friends[row])
             }
-            alphabet.append(String(rightValue!))
-            rowsInSection.append(rowsCount)
-            rowsCount = 1
         }
-        rowsInSection.append(rowsCount)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getTitles()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        prepareData()
     }
 
     // MARK: - Table view data source
 
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return alphabet
+        return titleForSection
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return alphabet.count
+        return titleForSection.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rowsInSection[section]
+        return items[section].count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(alphabet[section])
+        return String(titleForSection[section])
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: UserCell.reuseId, for: indexPath) as? UserCell else { return UITableViewCell() }
         
-        cell.name.text = friends[index].name
-        cell.photo.image = UIImage(named: friends[index].photo)
-        index += 1
+        let section = indexPath.section
+        let row = indexPath.row
+        let friend = items[section][row]
+        cell.name.text = friend.name
+        cell.photo.image = UIImage(named: friend.photo)
         
         return cell
     }
@@ -122,6 +136,6 @@ class FriendsViewController: UITableViewController {
         let photoController = segue.destination as! PhotoViewController
         let cell = sender as! UserCell
         let indexPath = tableView.indexPath(for: cell)
-        photoController.photo = friends[(indexPath!.section + 1) * (indexPath!.row + 1) - 1].photo
+        photoController.photo = items[indexPath!.section][indexPath!.row].photo
     }
 }
