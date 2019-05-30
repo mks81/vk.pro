@@ -69,13 +69,23 @@ class LikesControl: UIControl {
     }
     
     @objc func changeState() {
+        var scale: CGFloat = 1.5
         if alreadyLiked {
+            scale = 0.67
             likesCount -= 1
         } else {
             likesCount += 1
         }
         alreadyLiked.toggle()
         setNeedsDisplay()
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.transform = CGAffineTransform(scaleX: scale, y: scale)
+        }) { (true) in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.transform = CGAffineTransform(scaleX: 1, y: 1)
+            })
+        }
     }
 
     override func layoutSubviews() {
