@@ -10,12 +10,12 @@ import UIKit
 
 private let reuseIdentifier = "PhotoCell"
 
-class PhotoViewController: UICollectionViewController {
+class PhotoViewController: UICollectionViewController , UICollectionViewDelegateFlowLayout {
+    
     var photo = ""
     
-    
     //@IBOutlet weak var collectionView: UICollectionView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -59,6 +59,15 @@ class PhotoViewController: UICollectionViewController {
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let frameWidth = collectionView.frame.width
+        let photoWidth = UIImage(named: photo)!.size.width
+        let photoHeight = UIImage(named:photo)!.size.height
+        let ratio = frameWidth / photoWidth
+        
+        return CGSize(width: frameWidth, height: photoHeight * ratio)
+    }
+    
     // MARK: UICollectionViewDelegate
 
     /*
