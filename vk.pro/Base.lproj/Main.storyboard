@@ -129,9 +129,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="KVs-jO-Nbf">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="sVa-5V-Rn0" id="9uS-PJ-lkE"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="HaF-Hz-h0J" customClass="UserCell" customModule="vk_pro" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HaF-Hz-h0J" id="udu-w7-aXY">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -277,9 +285,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="gLv-tW-Dz7">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="Cx5-DP-1MS" id="sj0-Oc-9pt"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" id="qpz-vU-BQ2" customClass="GroupCell" customModule="vk_pro" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qpz-vU-BQ2" id="OlX-bn-tq0">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -433,6 +449,59 @@
             </objects>
             <point key="canvasLocation" x="-509" y="321"/>
         </scene>
+        <!--Новости-->
+        <scene sceneID="can-xs-O3i">
+            <objects>
+                <navigationController title="Новости" id="4rU-2l-nFr" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Новости" image="news-1" landscapeImage="news-1" largeContentSizeImage="news-1" id="BfN-Ni-axt"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Uxo-De-H1T">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Scz-xM-Z5H" kind="relationship" relationship="rootViewController" id="bSn-HP-tIs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="spe-Ez-gKJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1413" y="667"/>
+        </scene>
+        <!--Новости-->
+        <scene sceneID="8k0-vt-B5a">
+            <objects>
+                <collectionViewController id="Scz-xM-Z5H" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="env-RA-lz7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jYw-LR-vEl">
+                            <size key="itemSize" width="414" height="357"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="NewsCell" id="l1T-iC-gBz">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="357"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="357"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </view>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Scz-xM-Z5H" id="yZS-Ht-88T"/>
+                            <outlet property="delegate" destination="Scz-xM-Z5H" id="DIy-v8-F3b"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Новости" id="OlA-6F-3j5"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RUK-xK-GFW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-510.14492753623193" y="1035.9375"/>
+        </scene>
         <!--Друзья-->
         <scene sceneID="KeV-bf-Nxv">
             <objects>
@@ -454,6 +523,7 @@
         <scene sceneID="U4w-Pa-Nuz">
             <objects>
                 <tabBarController id="Rsl-vK-jYi" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="tPx-V8-ke3"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GjT-9Z-GBz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -462,16 +532,18 @@
                     <connections>
                         <segue destination="fSz-oM-9RH" kind="relationship" relationship="viewControllers" id="B7V-xd-ndx"/>
                         <segue destination="DG7-Eo-gVv" kind="relationship" relationship="viewControllers" id="cB8-JJ-orN"/>
+                        <segue destination="4rU-2l-nFr" kind="relationship" relationship="viewControllers" id="lJO-gd-vml"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y9N-r4-wIp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1397" y="-46"/>
+            <point key="canvasLocation" x="-1413" y="-46"/>
         </scene>
     </scenes>
     <resources>
         <image name="background" width="1600" height="1200"/>
         <image name="friend" width="30" height="30"/>
         <image name="group" width="30" height="30"/>
+        <image name="news-1" width="50" height="50"/>
     </resources>
 </document>
