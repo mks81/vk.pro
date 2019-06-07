@@ -10,4 +10,7 @@ import UIKit
 
 class NewsCell: UICollectionViewCell {
     
+    @IBOutlet weak var avatar: UIImageView!
+    @IBOutlet weak var photo: UIImageView!
+    
 }
