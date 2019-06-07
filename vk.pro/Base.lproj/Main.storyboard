@@ -563,25 +563,25 @@
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hpm-wY-g9d" customClass="LikesControl" customModule="vk_pro" customModuleProvider="target">
-                                            <rect key="frame" x="13" y="465" width="388" height="30"/>
+                                            <rect key="frame" x="13" y="465" width="77" height="30"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="McR-dQ-Y1K">
                                                     <rect key="frame" x="30" y="5" width="42" height="20"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="10" id="kXL-QC-E52"/>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="11" id="uMr-Oq-xzn"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="backgroundColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="McR-dQ-Y1K" secondAttribute="trailing" constant="5" id="0Go-H8-oOg"/>
-                                                <constraint firstItem="McR-dQ-Y1K" firstAttribute="leading" secondItem="Hpm-wY-g9d" secondAttribute="leading" constant="30" id="3zF-gO-gHW"/>
-                                                <constraint firstAttribute="bottom" secondItem="McR-dQ-Y1K" secondAttribute="bottom" constant="5" id="gWz-Ux-iZs"/>
-                                                <constraint firstItem="McR-dQ-Y1K" firstAttribute="top" secondItem="Hpm-wY-g9d" secondAttribute="top" constant="5" id="jOj-K2-n0X"/>
-                                                <constraint firstAttribute="height" constant="30" id="nHl-dk-9jJ"/>
+                                                <constraint firstAttribute="width" secondItem="McR-dQ-Y1K" secondAttribute="width" constant="35" id="46z-c7-XiN"/>
+                                                <constraint firstAttribute="trailing" secondItem="McR-dQ-Y1K" secondAttribute="trailing" constant="5" id="8gq-eE-9hs"/>
+                                                <constraint firstAttribute="height" constant="30" id="PeR-bG-XBC"/>
+                                                <constraint firstItem="McR-dQ-Y1K" firstAttribute="centerY" secondItem="Hpm-wY-g9d" secondAttribute="centerY" id="SgY-Oj-NjE"/>
+                                                <constraint firstItem="McR-dQ-Y1K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hpm-wY-g9d" secondAttribute="leading" symbolic="YES" id="fnF-HQ-YVx"/>
                                             </constraints>
                                             <connections>
                                                 <outlet property="likeLebel" destination="McR-dQ-Y1K" id="n8u-dy-QFB"/>
@@ -591,16 +591,15 @@
                                 </view>
                                 <constraints>
                                     <constraint firstItem="db1-a7-y1h" firstAttribute="top" secondItem="dhg-eW-Kpm" secondAttribute="bottom" constant="5" id="4lz-ub-mYe"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="Hpm-wY-g9d" secondAttribute="bottom" constant="5" id="AAW-G5-JK7"/>
-                                    <constraint firstItem="Hpm-wY-g9d" firstAttribute="leading" secondItem="l1T-iC-gBz" secondAttribute="leadingMargin" constant="5" id="H4U-NK-WA1"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="Hpm-wY-g9d" secondAttribute="bottom" constant="5" id="8oi-Tn-v3g"/>
+                                    <constraint firstItem="Hpm-wY-g9d" firstAttribute="top" secondItem="mkO-qk-926" secondAttribute="bottom" constant="5" id="Hqz-qk-4rp"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="mkO-qk-926" secondAttribute="trailing" id="J9A-5d-AkX"/>
                                     <constraint firstItem="db1-a7-y1h" firstAttribute="leading" secondItem="l1T-iC-gBz" secondAttribute="leadingMargin" constant="10" id="LCF-Mu-dRw"/>
+                                    <constraint firstItem="Hpm-wY-g9d" firstAttribute="leading" secondItem="l1T-iC-gBz" secondAttribute="leadingMargin" constant="5" id="MkH-jl-ccG"/>
                                     <constraint firstItem="u3u-ok-dnr" firstAttribute="leading" secondItem="dhg-eW-Kpm" secondAttribute="trailing" constant="10" id="QlN-gm-zg5"/>
                                     <constraint firstItem="mkO-qk-926" firstAttribute="leading" secondItem="l1T-iC-gBz" secondAttribute="leadingMargin" id="WdA-hh-TPJ"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="db1-a7-y1h" secondAttribute="trailing" constant="10" id="Ycc-Uy-JVL"/>
                                     <constraint firstItem="dhg-eW-Kpm" firstAttribute="top" secondItem="l1T-iC-gBz" secondAttribute="topMargin" constant="5" id="gU9-gQ-0uZ"/>
-                                    <constraint firstItem="Hpm-wY-g9d" firstAttribute="top" secondItem="mkO-qk-926" secondAttribute="bottom" constant="5" id="kcn-iT-WZA"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="Hpm-wY-g9d" secondAttribute="trailing" constant="5" id="loa-w5-ebH"/>
                                     <constraint firstAttribute="trailingMargin" secondItem="u3u-ok-dnr" secondAttribute="trailing" constant="10" id="me0-eR-Kro"/>
                                     <constraint firstItem="mkO-qk-926" firstAttribute="top" secondItem="db1-a7-y1h" secondAttribute="bottom" constant="5" id="piA-0c-UBK"/>
                                     <constraint firstItem="u3u-ok-dnr" firstAttribute="top" secondItem="l1T-iC-gBz" secondAttribute="topMargin" constant="5" id="sGp-Hj-4Uq"/>
@@ -608,7 +607,9 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="avatar" destination="1Il-wc-Efi" id="ROz-vc-Gg8"/>
+                                    <outlet property="name" destination="8OM-gp-1EZ" id="ZNC-3C-yWd"/>
                                     <outlet property="photo" destination="mkO-qk-926" id="aqX-hi-nDS"/>
+                                    <outlet property="text" destination="db1-a7-y1h" id="oaX-2y-Lu7"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>

@@ -25,6 +25,7 @@
 		059E19B72295283E00651FF2 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059E19B62295283E00651FF2 /* UserModel.swift */; };
 		05BE3AB522A950DB00A59A8D /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3AB422A950DB00A59A8D /* NewsCell.swift */; };
 		05BE3AB722A95F3300A59A8D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3AB622A95F3300A59A8D /* NewsViewController.swift */; };
+		05BE3AB922A9FADC00A59A8D /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3AB822A9FADC00A59A8D /* NewsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		059E19B62295283E00651FF2 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		05BE3AB422A950DB00A59A8D /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		05BE3AB622A95F3300A59A8D /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
+		05BE3AB822A9FADC00A59A8D /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 			children = (
 				059E19B3229526DF00651FF2 /* GroupModel.swift */,
 				059E19B62295283E00651FF2 /* UserModel.swift */,
+				05BE3AB822A9FADC00A59A8D /* NewsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -214,6 +217,7 @@
 				05BE3AB522A950DB00A59A8D /* NewsCell.swift in Sources */,
 				050555BF229AF5C9002B0575 /* LikesControl.swift in Sources */,
 				0589AA19228BF4C300B04176 /* MainViewController.swift in Sources */,
+				05BE3AB922A9FADC00A59A8D /* NewsModel.swift in Sources */,
 				0520C9EF229018BF00C04D76 /* UserCell.swift in Sources */,
 				0520C9F1229018E500C04D76 /* GroupCell.swift in Sources */,
 				0520C9F622901BE900C04D76 /* FindGroupViewController.swift in Sources */,

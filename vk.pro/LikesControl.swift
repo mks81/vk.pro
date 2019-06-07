@@ -14,6 +14,11 @@ extension Int {
 
 class LikesControl: UIControl {
     
+    // !!!! Почему не отображаются в сториборд? !!!!
+    @IBInspectable var strokeColor = UIColor.white
+    @IBInspectable var fillColor = UIColor.red
+    @IBInspectable var bgColor = UIColor.cyan.withAlphaComponent(0.3)
+    
     @IBOutlet weak var likeLebel: UILabel!
     
     var alreadyLiked = Bool.random()
@@ -47,14 +52,14 @@ class LikesControl: UIControl {
         let move = (rect.height - heartSize) / 2
         path.apply(CGAffineTransform(translationX: move, y: move))
         
-        UIColor.red.setFill()
-        UIColor.white.setStroke()
-        likeLebel.textColor = UIColor.white
+        fillColor.setFill()
+        strokeColor.setStroke()
+        likeLebel.textColor = strokeColor
         likeLebel.text = String(likesCount)
         if alreadyLiked {
-            UIColor.red.setStroke()
+            fillColor.setStroke()
             path.fill()
-            likeLebel.textColor = UIColor.red
+            likeLebel.textColor = fillColor
         }
         path.stroke()
     }
@@ -63,7 +68,7 @@ class LikesControl: UIControl {
         
         addTarget(self, action: #selector(changeState), for: .touchUpInside)
 
-        backgroundColor = UIColor(red: 0, green: 128, blue: 128, alpha: 0.3)
+        backgroundColor = bgColor
         layer.cornerRadius = frame.height / 4
         clipsToBounds = true
     }

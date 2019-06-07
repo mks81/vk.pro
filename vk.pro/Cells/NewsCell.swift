@@ -12,5 +12,7 @@ class NewsCell: UICollectionViewCell {
     
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var photo: UIImageView!
+    @IBOutlet weak var text: UILabel!
+    @IBOutlet weak var name: UILabel!
     
 }
