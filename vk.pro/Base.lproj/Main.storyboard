@@ -583,6 +583,18 @@
                                                 <constraint firstItem="McR-dQ-Y1K" firstAttribute="centerY" secondItem="Hpm-wY-g9d" secondAttribute="centerY" id="SgY-Oj-NjE"/>
                                                 <constraint firstItem="McR-dQ-Y1K" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hpm-wY-g9d" secondAttribute="leading" symbolic="YES" id="fnF-HQ-YVx"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="strokeColor">
+                                                    <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="bgColor">
+                                                    <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="bgAlpha">
+                                                    <real key="value" value="0.0"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="background" value="NO"/>
+                                            </userDefinedRuntimeAttributes>
                                             <connections>
                                                 <outlet property="likeLebel" destination="McR-dQ-Y1K" id="n8u-dy-QFB"/>
                                             </connections>
