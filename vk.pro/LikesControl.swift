@@ -14,7 +14,6 @@ extension Int {
 
 class LikesControl: UIControl {
     
-    // !!!! Почему не отображаются в сториборд? !!!!
     @IBInspectable var strokeColor: UIColor = UIColor.white
     @IBInspectable var fillColor: UIColor = UIColor.red
     @IBInspectable var bgAlpha: CGFloat = 0.3
