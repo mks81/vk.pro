@@ -50,12 +50,50 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         }
     }
     
+    func createRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.backgroundColor = .clear
+        refreshControl?.tintColor = .clear
+        
+        var step = -30
+        for _ in 1...3 {
+            
+            let shape = CAShapeLayer()
+            refreshControl?.layer.addSublayer(shape)
+            shape.fillColor = UIColor.gray.cgColor
+            shape.opacity = 0
+            
+            let rect = refreshControl!.bounds
+            let circlePath = UIBezierPath(arcCenter: CGPoint(x: rect.width/2+CGFloat(step),y: rect.height/2), radius: CGFloat(10), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+            
+            shape.path = circlePath.cgPath
+            
+            let animation = CABasicAnimation()
+            animation.duration = 1
+            animation.repeatCount = .greatestFiniteMagnitude
+            animation.autoreverses = true
+            animation.fromValue = CGFloat(0)
+            animation.toValue = CGFloat(1)
+            animation.isRemovedOnCompletion = false
+            shape.add(animation, forKey: "opacity")
+            
+            step += 30
+        }
+        
+        refreshControl!.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        createRefreshControl()
         prepareData()
     }
 
+    @objc func refresh(refreshControl: UIRefreshControl) {
+        refreshControl.endRefreshing()
+    }
+    
     // MARK: - SearchBar delegate
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
@@ -122,13 +160,9 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 
         cell.transform = CGAffineTransform(translationX: 100, y: 0)
-        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseOut], animations: {
+        UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseOut], animations: {
             cell.transform = CGAffineTransform(translationX: -100, y: 0)
         })
-    }
-    
-    override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
     }
     
     // MARK: - Navigation
