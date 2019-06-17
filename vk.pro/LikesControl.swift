@@ -14,6 +14,12 @@ extension Int {
 
 class LikesControl: UIControl {
     
+    @IBInspectable var strokeColor: UIColor = UIColor.white
+    @IBInspectable var fillColor: UIColor = UIColor.red
+    @IBInspectable var bgAlpha: CGFloat = 0.3
+    @IBInspectable var bgColor: UIColor = UIColor.cyan
+    @IBInspectable var background: Bool = true
+    
     @IBOutlet weak var likeLebel: UILabel!
     
     var alreadyLiked = Bool.random()
@@ -47,14 +53,15 @@ class LikesControl: UIControl {
         let move = (rect.height - heartSize) / 2
         path.apply(CGAffineTransform(translationX: move, y: move))
         
-        UIColor.red.setFill()
-        UIColor.white.setStroke()
-        likeLebel.textColor = UIColor.white
+        backgroundColor = background ? bgColor.withAlphaComponent(bgAlpha) : .clear
+        fillColor.setFill()
+        strokeColor.setStroke()
+        likeLebel.textColor = strokeColor
         likeLebel.text = String(likesCount)
         if alreadyLiked {
-            UIColor.red.setStroke()
+            fillColor.setStroke()
             path.fill()
-            likeLebel.textColor = UIColor.red
+            likeLebel.textColor = fillColor
         }
         path.stroke()
     }
@@ -63,7 +70,6 @@ class LikesControl: UIControl {
         
         addTarget(self, action: #selector(changeState), for: .touchUpInside)
 
-        backgroundColor = UIColor(red: 0, green: 128, blue: 128, alpha: 0.3)
         layer.cornerRadius = frame.height / 4
         clipsToBounds = true
     }
