@@ -185,7 +185,7 @@
                                 <connections>
                                     <outlet property="name" destination="RO7-eG-NJg" id="beU-Y7-DR6"/>
                                     <outlet property="photo" destination="Wzp-xy-rT0" id="XY1-9g-CIh"/>
-                                    <segue destination="OsH-UR-foV" kind="show" identifier="ShowPhotoSegue" id="4pa-RR-SFB"/>
+                                    <segue destination="1f4-0H-TjR" kind="show" id="NSF-zD-swJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -199,6 +199,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G02-y9-Vsn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="395.6521739130435" y="-356.25"/>
+        </scene>
+        <!--Photo Controller-->
+        <scene sceneID="MLS-nB-O6V">
+            <objects>
+                <viewController id="1f4-0H-TjR" customClass="PhotoController" customModule="vk_pro" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1tt-kO-d9f">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="3Ds-dG-lel"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ir5-Xv-yOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1105.7971014492755" y="-356.25"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="cAU-VT-ZZI">
@@ -275,7 +290,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Fv-Hj-wy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1253.6231884057972" y="-356.25"/>
+            <point key="canvasLocation" x="1814" y="-356"/>
         </scene>
         <!--Группы-->
         <scene sceneID="qRP-D6-VeT">
