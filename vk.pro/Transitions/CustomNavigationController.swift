@@ -20,8 +20,10 @@ class CustomNavigationController: UINavigationController, UINavigationController
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         switch operation {
         case .push:
+            transitionAnimator.isPresenting = true
             return transitionAnimator
         case .pop:
+            transitionAnimator.isPresenting = false
             return transitionAnimator
         default:
             return nil

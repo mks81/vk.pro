@@ -9,17 +9,9 @@
 import UIKit
 
 class CustomAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    var duration: TimeInterval = 3
-    var isPresenting: Bool = true
-//    var originFrame: CGRect
-//    var image: UIImage
     
-//    init(duration: TimeInterval, isPresenting: Bool, originFrame: CGRect, image: UIImage) {
-//        self.duration = duration
-//        self.isPresenting = isPresenting
-//        self.originFrame = originFrame
-//        self.image = image
-//    }
+    var duration: TimeInterval = 1
+    var isPresenting: Bool = true
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         
@@ -35,29 +27,42 @@ class CustomAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         isPresenting ? container.addSubview(toView) : container.insertSubview(toView, belowSubview: fromView)
         
         if(isPresenting) {
-//            toView.frame = fromView.frame
-//            toView.alpha = 0
+            toView.setAnchorPoint(CGPoint(x: 1, y: 0))
+
+            toView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
         } else {
-            toView.frame = CGRect(x: toView.frame.width, y: 0, width: toView.frame.width, height: toView.frame.height)
-//            toView.alpha = 1
         }
         toView.layoutIfNeeded()
         
         UIView.animate(withDuration: duration, animations: {
             if(self.isPresenting) {
-                toView.transform = CGAffineTransform(rotationAngle: .pi * 2)
-//                toView.frame = fromView.frame
-//                toView.alpha = 1
-                
+                toView.transform = CGAffineTransform(rotationAngle: 0)
             } else {
-                fromView.frame = CGRect(x: toView.frame.width, y: 0, width: toView.frame.width, height: toView.frame.height)
-                fromView.alpha = 0
+                fromView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
             }
         }) { (finished) in
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
-        
     }
-    
+}
 
+extension UIView {
+    func setAnchorPoint(_ point: CGPoint) {
+        var newPoint = CGPoint(x: bounds.size.width * point.x, y: bounds.size.height * point.y)
+        var oldPoint = CGPoint(x: bounds.size.width * layer.anchorPoint.x, y: bounds.size.height * layer.anchorPoint.y);
+        
+        newPoint = newPoint.applying(transform)
+        oldPoint = oldPoint.applying(transform)
+        
+        var position = layer.position
+        
+        position.x -= oldPoint.x
+        position.x += newPoint.x
+        
+        position.y -= oldPoint.y
+        position.y += newPoint.y
+        
+        layer.position = position
+        layer.anchorPoint = point
+    }
 }

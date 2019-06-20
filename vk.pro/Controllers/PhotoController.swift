@@ -62,7 +62,7 @@ class PhotoController: UIViewController {
     @objc func swipeLeft(_ recognizer: UISwipeGestureRecognizer) {
         
         if(self.index < self.photos.count - 1) {
-
+            self.imageViews[self.index + 1].isHidden = false
             UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
                 //уменьшаем отображаемую картинку
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
@@ -80,8 +80,10 @@ class PhotoController: UIViewController {
                 UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 1, animations: {
                     self.imageViews[self.index + 1].center.x = self.frameWidth / 2
                 })
+            }, completion: { (true) in
+                self.imageViews[self.index].isHidden = true
                 self.index += 1
-            }, completion: nil)
+            })
         } else {
             UIView.animate(withDuration: 0.33, animations: {
                 self.imageViews[self.index].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
@@ -92,11 +94,11 @@ class PhotoController: UIViewController {
             }
         }
     }
-
+    
     @objc func swipeRight(_ recognizer: UISwipeGestureRecognizer) {
         
         if(self.index > 0) {
-            
+            self.imageViews[self.index - 1].isHidden = false
             UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
                     self.imageViews[self.index].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
@@ -113,8 +115,10 @@ class PhotoController: UIViewController {
                 UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 1, animations: {
                     self.imageViews[self.index - 1].center.x = self.frameWidth / 2
                 })
+            }, completion: { (true) in
+                self.imageViews[self.index].isHidden = true
                 self.index -= 1
-        }, completion: nil)
+            })
         } else {
             UIView.animate(withDuration: 0.33, animations: {
                 self.imageViews[self.index].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
