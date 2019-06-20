@@ -40,17 +40,11 @@ class PhotoViewController: UICollectionViewController , UICollectionViewDelegate
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let frameWidth = collectionView.frame.width
-//        let photoWidth = UIImage(named: photo)!.size.width
-//        let photoHeight = UIImage(named:photo)!.size.height
-//        let ratio = frameWidth / photoWidth
-//
-//        return CGSize(width: frameWidth, height: photoHeight * ratio)
-       // collectionViewLayout.
-
         
         let spacingCount = cellsCount + 1
         let viewWidth = collectionView.frame.width
+        // MARK: Help me!
+        //Вычисляю сторону ячейки, что бы все спэйсинги были одинаковыми и вмещалось сколько нужно ячеек. Из ширины фрэйма вычитаю ширину всех спэйсингов, результат делю на кол-во ячеек, все ведь логично! Почему на экране спэйсинги разные?
         let size = ((viewWidth - CGFloat(spacingCount) * spacing)) / CGFloat(cellsCount)
       
         return CGSize(width: size, height: size)

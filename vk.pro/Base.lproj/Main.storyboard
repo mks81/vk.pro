@@ -451,7 +451,7 @@
         <!--Группы-->
         <scene sceneID="vOH-gv-yYl">
             <objects>
-                <navigationController id="DG7-Eo-gVv" sceneMemberID="viewController">
+                <navigationController id="DG7-Eo-gVv" customClass="CustomNavigationController" customModule="vk_pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Группы" image="group" landscapeImage="group" largeContentSizeImage="group" id="ZZB-QG-I9K"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MvU-nc-XRR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -468,7 +468,7 @@
         <!--Новости-->
         <scene sceneID="can-xs-O3i">
             <objects>
-                <navigationController title="Новости" id="4rU-2l-nFr" sceneMemberID="viewController">
+                <navigationController title="Новости" id="4rU-2l-nFr" customClass="CustomNavigationController" customModule="vk_pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Новости" image="news-3" landscapeImage="news-3" largeContentSizeImage="news-3" id="BfN-Ni-axt"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Uxo-De-H1T">
