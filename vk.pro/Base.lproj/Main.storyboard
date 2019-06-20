@@ -654,7 +654,7 @@
         <!--Друзья-->
         <scene sceneID="KeV-bf-Nxv">
             <objects>
-                <navigationController id="fSz-oM-9RH" sceneMemberID="viewController">
+                <navigationController id="fSz-oM-9RH" customClass="CustomNavigationController" customModule="vk_pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Друзья" image="friend" landscapeImage="friend" largeContentSizeImage="friend" id="wPq-iI-B02"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0V6-Ue-lhf">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
