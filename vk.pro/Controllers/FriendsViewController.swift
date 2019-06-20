@@ -169,9 +169,9 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let photoController = segue.destination as! PhotoController
+        let photoViewController = segue.destination as! PhotoViewController
         let cell = sender as! UserCell
         let indexPath = tableView.indexPath(for: cell)
-        photoController.photo = items[indexPath!.section][indexPath!.row].photo
+        photoViewController.photo = items[indexPath!.section][indexPath!.row].photo
     }
 }

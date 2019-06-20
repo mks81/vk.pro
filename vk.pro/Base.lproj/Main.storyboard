@@ -185,7 +185,7 @@
                                 <connections>
                                     <outlet property="name" destination="RO7-eG-NJg" id="beU-Y7-DR6"/>
                                     <outlet property="photo" destination="Wzp-xy-rT0" id="XY1-9g-CIh"/>
-                                    <segue destination="1f4-0H-TjR" kind="show" id="NSF-zD-swJ"/>
+                                    <segue destination="OsH-UR-foV" kind="show" id="nTt-hc-zXr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -213,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ir5-Xv-yOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1105.7971014492755" y="-356.25"/>
+            <point key="canvasLocation" x="1896" y="-356"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="cAU-VT-ZZI">
@@ -279,6 +279,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="photo" destination="N1o-1v-cGu" id="nWU-Gb-47M"/>
+                                    <segue destination="1f4-0H-TjR" kind="show" id="Haz-x0-M5k"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -290,7 +291,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Fv-Hj-wy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1814" y="-356"/>
+            <point key="canvasLocation" x="1129" y="-356"/>
         </scene>
         <!--Группы-->
         <scene sceneID="qRP-D6-VeT">
