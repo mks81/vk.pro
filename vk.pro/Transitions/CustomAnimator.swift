@@ -41,7 +41,11 @@ class CustomAnimator: NSObject, UIViewControllerAnimatedTransitioning {
                 fromView.transform = CGAffineTransform(rotationAngle: -.pi / 2)
             }
         }) { (finished) in
-            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+            if finished && !transitionContext.transitionWasCancelled {
+                let source = self.isPresenting ? toView : fromView
+                source.transform = .identity
+            }
+            transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
         }
     }
 }
