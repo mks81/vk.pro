@@ -56,8 +56,6 @@ class PhotoController: UIViewController {
         return imageHeight
     }
     
-    var animator: UIViewPropertyAnimator!
-    
     @objc func swipeLeft(_ recognizer: UISwipeGestureRecognizer) {
         
         if(self.index < self.photos.count - 1) {
@@ -70,6 +68,7 @@ class PhotoController: UIViewController {
 
             UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
                 //уменьшаем отображаемую картинку
+                //что бы было понятней, hiddenImageIndex ^ 1 вычисляет отображаемую картинку, либо 0, либо 1
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
                     self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
                 })
