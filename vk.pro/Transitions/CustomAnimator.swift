@@ -10,7 +10,7 @@ import UIKit
 
 class CustomAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     
-    var duration: TimeInterval = 1
+    var duration: TimeInterval = 0.5
     var isPresenting: Bool = true
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
