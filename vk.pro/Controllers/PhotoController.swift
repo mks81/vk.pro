@@ -64,7 +64,7 @@ class PhotoController: UIViewController {
         
         let expression = left ? swipeLeftExpression : swipeRightExpression
         
-        if(expression) {
+        if expression {
             let image = UIImage(named: photos[index + value])
             imageViews[hiddenImageIndex].image = image
             let imageHeight = getImageHight(imageSource: image!)
