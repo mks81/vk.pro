@@ -56,16 +56,22 @@ class PhotoController: UIViewController {
         return imageHeight
     }
     
-    @objc func swipeLeft(_ recognizer: UISwipeGestureRecognizer) {
+    func listAnimation(left: Bool) {
+        let value = left ? 1 : -1
+     
+        let swipeLeftExpression = self.index < self.photos.count - 1
+        let swipeRightExpression = self.index > 0
         
-        if(self.index < self.photos.count - 1) {
-            let image = UIImage(named: photos[index + 1])
+        let expression = left ? swipeLeftExpression : swipeRightExpression
+        
+        if(expression) {
+            let image = UIImage(named: photos[index + value])
             imageViews[hiddenImageIndex].image = image
             let imageHeight = getImageHight(imageSource: image!)
             
-            imageViews[hiddenImageIndex].frame = CGRect(x: frameWidth, y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
+            imageViews[hiddenImageIndex].frame = CGRect(x: frameWidth * CGFloat(value), y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
             self.imageViews[hiddenImageIndex].isHidden = false
-
+            
             UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
                 //уменьшаем отображаемую картинку
                 //что бы было понятней, hiddenImageIndex ^ 1 вычисляет отображаемую картинку, либо 0, либо 1
@@ -74,7 +80,7 @@ class PhotoController: UIViewController {
                 })
                 //отодвигаем отображаемую картинку
                 UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 1, animations: {
-                    self.imageViews[self.hiddenImageIndex ^ 1].frame.origin.x -= self.frameHeight
+                    self.imageViews[self.hiddenImageIndex ^ 1].frame.origin.x = self.frameHeight * -CGFloat(value)
                 })
                 //сдвигаем новую картинку на место отображаемой
                 UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 1, animations: {
@@ -82,7 +88,7 @@ class PhotoController: UIViewController {
                 })
             }, completion: { (true) in
                 self.imageViews[self.hiddenImageIndex ^ 1].isHidden = true
-                self.index += 1
+                self.index += value
                 self.hiddenImageIndex ^= 1
             })
         } else {
@@ -96,39 +102,11 @@ class PhotoController: UIViewController {
         }
     }
     
+    @objc func swipeLeft(_ recognizer: UISwipeGestureRecognizer) {
+        listAnimation(left: true)
+    }
+    
     @objc func swipeRight(_ recognizer: UISwipeGestureRecognizer) {
-        
-        if(self.index > 0) {
-            let image = UIImage(named: photos[index - 1])
-            imageViews[hiddenImageIndex].image = image
-            let imageHeight = getImageHight(imageSource: image!)
-            
-            imageViews[hiddenImageIndex].frame = CGRect(x: -frameWidth, y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
-            self.imageViews[hiddenImageIndex].isHidden = false
-            
-            UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
-                    self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
-                })
-                UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 1, animations: {
-                    self.imageViews[self.hiddenImageIndex ^ 1].frame.origin.x += self.frameHeight
-                })
-                UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 1, animations: {
-                    self.imageViews[self.hiddenImageIndex].frame.origin.x = 0
-                })
-            }, completion: { (true) in
-                self.imageViews[self.hiddenImageIndex ^ 1].isHidden = true
-                self.index -= 1
-                self.hiddenImageIndex ^= 1
-            })
-        } else {
-            UIView.animate(withDuration: 0.33, animations: {
-                self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
-            }) { (true) in
-                UIView.animate(withDuration: 0.1, animations: {
-                    self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: 1, y: 1)
-                })
-            }
-        }
+        listAnimation(left: false)
     }
 }
