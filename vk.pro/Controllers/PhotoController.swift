@@ -10,11 +10,9 @@ import UIKit
 
 class PhotoController: UIViewController {
 
+    var photos: [String] = ["phuket", "den", "durov", "ira", "kreml", "kreml1", "musk", "nadya", "book", "putin", "buterin"]
     var index = 0
     var hiddenImageIndex = 1
-    var hiddenImageIsRight = true
-    
-    var photos: [String] = ["phuket", "den", "durov", "ira", "kreml", "kreml1", "musk", "nadya", "book", "putin", "buterin"]
     var photo = ""
     var imageViews = [UIImageView]()
     
@@ -30,7 +28,6 @@ class PhotoController: UIViewController {
         frameWidth = view.bounds.width
         frameHeight = view.bounds.height
         
-        //хотел сделать что бы выводились только 3 imageView - отображаемая и по краям за фреймом, и в процессе перелистывания заменялись, не получилось, недостаточно знаний!
         for i in 0...1 {
             imageViews.append(UIImageView())
             
@@ -64,14 +61,13 @@ class PhotoController: UIViewController {
     @objc func swipeLeft(_ recognizer: UISwipeGestureRecognizer) {
         
         if(self.index < self.photos.count - 1) {
-            imageViews[hiddenImageIndex].image = UIImage(named: photos[index + 1])
-            if !hiddenImageIsRight {
-                print(imageViews[hiddenImageIndex].frame.origin.x)
-                imageViews[hiddenImageIndex].frame.origin.x = frameWidth
-                print(imageViews[hiddenImageIndex].frame.origin.x)
-            }
-            self.imageViews[hiddenImageIndex].transform = CGAffineTransform(scaleX: 1, y: 1)
+            let image = UIImage(named: photos[index + 1])
+            imageViews[hiddenImageIndex].image = image
+            let imageHeight = getImageHight(imageSource: image!)
+            
+            imageViews[hiddenImageIndex].frame = CGRect(x: frameWidth, y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
             self.imageViews[hiddenImageIndex].isHidden = false
+
             UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
                 //уменьшаем отображаемую картинку
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
@@ -89,7 +85,6 @@ class PhotoController: UIViewController {
                 self.imageViews[self.hiddenImageIndex ^ 1].isHidden = true
                 self.index += 1
                 self.hiddenImageIndex ^= 1
-                self.hiddenImageIsRight = false
             })
         } else {
             UIView.animate(withDuration: 0.33, animations: {
@@ -105,22 +100,20 @@ class PhotoController: UIViewController {
     @objc func swipeRight(_ recognizer: UISwipeGestureRecognizer) {
         
         if(self.index > 0) {
-            imageViews[hiddenImageIndex].image = UIImage(named: photos[index - 1])
-            if hiddenImageIsRight {
-                print(imageViews[hiddenImageIndex].frame.origin.x)
-                imageViews[hiddenImageIndex].frame.origin.x = -frameWidth
-            }
-            self.imageViews[hiddenImageIndex].transform = CGAffineTransform(scaleX: 1, y: 1)
+            let image = UIImage(named: photos[index - 1])
+            imageViews[hiddenImageIndex].image = image
+            let imageHeight = getImageHight(imageSource: image!)
+            
+            imageViews[hiddenImageIndex].frame = CGRect(x: -frameWidth, y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
             self.imageViews[hiddenImageIndex].isHidden = false
+            
             UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
                     self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
                 })
-            
                 UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 1, animations: {
                     self.imageViews[self.hiddenImageIndex ^ 1].frame.origin.x += self.frameHeight
                 })
-            
                 UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 1, animations: {
                     self.imageViews[self.hiddenImageIndex].frame.origin.x = 0
                 })
@@ -128,7 +121,6 @@ class PhotoController: UIViewController {
                 self.imageViews[self.hiddenImageIndex ^ 1].isHidden = true
                 self.index -= 1
                 self.hiddenImageIndex ^= 1
-                self.hiddenImageIsRight = true
             })
         } else {
             UIView.animate(withDuration: 0.33, animations: {
