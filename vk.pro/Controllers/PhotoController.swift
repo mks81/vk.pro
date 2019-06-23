@@ -11,6 +11,7 @@ import UIKit
 class PhotoController: UIViewController {
 
     var photos: [String] = ["phuket", "den", "durov", "ira", "kreml", "kreml1", "musk", "nadya", "book", "putin", "buterin"]
+    var animationInProgress = false
     var index = 0
     var hiddenImageIndex = 1
     var photo = ""
@@ -54,6 +55,8 @@ class PhotoController: UIViewController {
     }
     
     func listAnimation(left: Bool) {
+        if animationInProgress { return }
+        animationInProgress = true
         let value = left ? 1 : -1
      
         let swipeLeftExpression = self.index < self.photos.count - 1
@@ -88,15 +91,21 @@ class PhotoController: UIViewController {
                 self.imageViews[self.hiddenImageIndex ^ 1].removeFromSuperview()
                 self.index += value
                 self.hiddenImageIndex ^= 1
+                self.animationInProgress = false
             })
         } else {
-            UIView.animate(withDuration: 0.33, animations: {
-                self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
-            }) { (true) in
-                UIView.animate(withDuration: 0.1, animations: {
+            UIView.animateKeyframes(withDuration: 0.43, delay: 0, options: .calculationModeLinear, animations: {
+                //уменьшаем отображаемую картинку
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
+                    self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
+                })
+                //возварщаем масштаб картинки
+                UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 0.43, animations: {
                     self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: 1, y: 1)
                 })
-            }
+            }, completion: { (true) in
+                self.animationInProgress = false
+            })
         }
     }
     
