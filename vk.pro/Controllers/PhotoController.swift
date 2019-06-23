@@ -66,15 +66,16 @@ class PhotoController: UIViewController {
         
         if expression {
             let image = UIImage(named: photos[index + value])
+            
+            imageViews[hiddenImageIndex] = UIImageView()
             imageViews[hiddenImageIndex].image = image
             let imageHeight = getImageHight(imageSource: image!)
-            
             imageViews[hiddenImageIndex].frame = CGRect(x: frameWidth * CGFloat(value), y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
-            self.imageViews[hiddenImageIndex].isHidden = false
+            view.addSubview(imageViews[hiddenImageIndex])
             
             UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
                 //уменьшаем отображаемую картинку
-                //что бы было понятней, hiddenImageIndex ^ 1 вычисляет отображаемую картинку, либо 0, либо 1
+                //hiddenImageIndex ^ 1 вычисляет отображаемую картинку, либо 0, либо 1
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
                     self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
                 })
@@ -87,7 +88,7 @@ class PhotoController: UIViewController {
                     self.imageViews[self.hiddenImageIndex].frame.origin.x = 0
                 })
             }, completion: { (true) in
-                self.imageViews[self.hiddenImageIndex ^ 1].isHidden = true
+                self.imageViews[self.hiddenImageIndex ^ 1].removeFromSuperview()
                 self.index += value
                 self.hiddenImageIndex ^= 1
             })
