@@ -14,7 +14,7 @@ class PhotoController: UIViewController {
     var index = 0
     var hiddenImageIndex = 1
     var photo = ""
-    var imageViews = [UIImageView]()
+    var imageViews: [UIImageView] = [UIImageView(), UIImageView()]
     
     var frameWidth: CGFloat = 0.0
     var frameHeight: CGFloat = 0.0
@@ -28,15 +28,12 @@ class PhotoController: UIViewController {
         frameWidth = view.bounds.width
         frameHeight = view.bounds.height
         
-        for i in 0...1 {
-            imageViews.append(UIImageView())
-            
-            let image = UIImage(named: photos[i])
-            imageViews[i] = UIImageView(image: image)
-            let imageHeight = getImageHight(imageSource: image!)
-            imageViews[i].frame = CGRect(x: CGFloat(i) * frameWidth, y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
-            view.addSubview(imageViews[i])
-        }
+        imageViews.append(UIImageView())
+        let image = UIImage(named: photos[0])
+        imageViews[0] = UIImageView(image: image)
+        let imageHeight = getImageHight(imageSource: image!)
+        imageViews[0].frame = CGRect(x: 0, y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
+        view.addSubview(imageViews[0])
         
         let swipeLeft =  UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
