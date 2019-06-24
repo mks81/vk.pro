@@ -29,7 +29,6 @@ class PhotoController: UIViewController {
         frameWidth = view.bounds.width
         frameHeight = view.bounds.height
         
-        imageViews.append(UIImageView())
         let image = UIImage(named: photos[0])
         imageViews[0] = UIImageView(image: image)
         let imageHeight = getImageHight(imageSource: image!)
