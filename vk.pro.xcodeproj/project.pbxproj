@@ -31,6 +31,7 @@
 		05BE3AB522A950DB00A59A8D /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3AB422A950DB00A59A8D /* NewsCell.swift */; };
 		05BE3AB722A95F3300A59A8D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3AB622A95F3300A59A8D /* NewsViewController.swift */; };
 		05BE3ABB22AA52C200A59A8D /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3ABA22AA52C200A59A8D /* NewsModel.swift */; };
+		05BE3ADE22C556D100A59A8D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3ADD22C556D100A59A8D /* Session.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		05BE3AB422A950DB00A59A8D /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		05BE3AB622A95F3300A59A8D /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		05BE3ABA22AA52C200A59A8D /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		05BE3ADD22C556D100A59A8D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 		0589AA05228BF0FC00B04176 /* vk.pro */ = {
 			isa = PBXGroup;
 			children = (
+				05BE3ADC22C5557200A59A8D /* Controls */,
 				057E335922BB694700E86EAB /* Transitions */,
 				0589AA06228BF0FC00B04176 /* AppDelegate.swift */,
 				050555B9229A94FE002B0575 /* Views */,
@@ -145,8 +148,7 @@
 				0589AA0A228BF0FC00B04176 /* Main.storyboard */,
 				0589AA0F228BF10100B04176 /* LaunchScreen.storyboard */,
 				0589AA12228BF10100B04176 /* Info.plist */,
-				050555BE229AF5C9002B0575 /* LikesControl.swift */,
-				057E335E22BCAE3D00E86EAB /* CustomRefreshControl.swift */,
+				05BE3ADD22C556D100A59A8D /* Session.swift */,
 			);
 			path = vk.pro;
 			sourceTree = "<group>";
@@ -159,6 +161,15 @@
 				059E19B62295283E00651FF2 /* UserModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		05BE3ADC22C5557200A59A8D /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				050555BE229AF5C9002B0575 /* LikesControl.swift */,
+				057E335E22BCAE3D00E86EAB /* CustomRefreshControl.swift */,
+			);
+			path = Controls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -250,6 +261,7 @@
 				0520C9EA2290113800C04D76 /* FriendsViewController.swift in Sources */,
 				0589AA07228BF0FC00B04176 /* AppDelegate.swift in Sources */,
 				057E335722B7AB1A00E86EAB /* PhotoController.swift in Sources */,
+				05BE3ADE22C556D100A59A8D /* Session.swift in Sources */,
 				050555B422973200002B0575 /* PhotoViewController.swift in Sources */,
 				057E335D22BB845300E86EAB /* CustomNavigationController.swift in Sources */,
 				050555B62297327C002B0575 /* PhotoCell.swift in Sources */,

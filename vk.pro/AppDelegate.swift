@@ -27,12 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let navigationBarAppearance = UINavigationBar.appearance()
-        //navigationBarAppearance.backgroundColor = UIColor.gray
         navigationBarAppearance.tintColor = UIColor.white
         navigationBarAppearance.barTintColor = UIColorFromHex(rgbValue: 0x4c75a3)
         navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        //let tableViewAppearance = UITableView.appearance()
-        //tableViewAppearance.tableHeaderView.text = UIColor.gray
+        
+        //Temp
+        _ = Session.instance
         
         return true
     }
