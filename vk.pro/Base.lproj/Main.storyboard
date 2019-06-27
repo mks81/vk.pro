@@ -185,7 +185,7 @@
                                 <connections>
                                     <outlet property="name" destination="RO7-eG-NJg" id="beU-Y7-DR6"/>
                                     <outlet property="photo" destination="Wzp-xy-rT0" id="XY1-9g-CIh"/>
-                                    <segue destination="1f4-0H-TjR" kind="show" id="NSF-zD-swJ"/>
+                                    <segue destination="OsH-UR-foV" kind="show" id="nTt-hc-zXr"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -207,13 +207,13 @@
                     <view key="view" contentMode="scaleToFill" id="1tt-kO-d9f">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="3Ds-dG-lel"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ir5-Xv-yOI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1105.7971014492755" y="-356.25"/>
+            <point key="canvasLocation" x="1896" y="-356"/>
         </scene>
         <!--Photo View Controller-->
         <scene sceneID="cAU-VT-ZZI">
@@ -279,6 +279,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="photo" destination="N1o-1v-cGu" id="nWU-Gb-47M"/>
+                                    <segue destination="1f4-0H-TjR" kind="show" id="Haz-x0-M5k"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -290,7 +291,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Fv-Hj-wy9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1814" y="-356"/>
+            <point key="canvasLocation" x="1129" y="-356"/>
         </scene>
         <!--Группы-->
         <scene sceneID="qRP-D6-VeT">
@@ -450,7 +451,7 @@
         <!--Группы-->
         <scene sceneID="vOH-gv-yYl">
             <objects>
-                <navigationController id="DG7-Eo-gVv" sceneMemberID="viewController">
+                <navigationController id="DG7-Eo-gVv" customClass="CustomNavigationController" customModule="vk_pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Группы" image="group" landscapeImage="group" largeContentSizeImage="group" id="ZZB-QG-I9K"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MvU-nc-XRR">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -467,7 +468,7 @@
         <!--Новости-->
         <scene sceneID="can-xs-O3i">
             <objects>
-                <navigationController title="Новости" id="4rU-2l-nFr" sceneMemberID="viewController">
+                <navigationController title="Новости" id="4rU-2l-nFr" customClass="CustomNavigationController" customModule="vk_pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Новости" image="news-3" landscapeImage="news-3" largeContentSizeImage="news-3" id="BfN-Ni-axt"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Uxo-De-H1T">
@@ -654,7 +655,7 @@
         <!--Друзья-->
         <scene sceneID="KeV-bf-Nxv">
             <objects>
-                <navigationController id="fSz-oM-9RH" sceneMemberID="viewController">
+                <navigationController id="fSz-oM-9RH" customClass="CustomNavigationController" customModule="vk_pro" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Друзья" image="friend" landscapeImage="friend" largeContentSizeImage="friend" id="wPq-iI-B02"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0V6-Ue-lhf">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

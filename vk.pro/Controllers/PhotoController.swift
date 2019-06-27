@@ -10,10 +10,12 @@ import UIKit
 
 class PhotoController: UIViewController {
 
-    var index = 0
     var photos: [String] = ["phuket", "den", "durov", "ira", "kreml", "kreml1", "musk", "nadya", "book", "putin", "buterin"]
+    var animationInProgress = false
+    var index = 0
+    var hiddenImageIndex = 1
     var photo = ""
-    var imageViews = [UIImageView]()
+    var imageViews: [UIImageView] = [UIImageView(), UIImageView()]
     
     var frameWidth: CGFloat = 0.0
     var frameHeight: CGFloat = 0.0
@@ -27,16 +29,11 @@ class PhotoController: UIViewController {
         frameWidth = view.bounds.width
         frameHeight = view.bounds.height
         
-        //хотел сделать что бы выводились только 3 imageView - отображаемая и по краям за фреймом, и в процессе перелистывания заменялись, не получилось, недостаточно знаний!
-        for i in 0..<photos.count {
-            imageViews.append(UIImageView())
-            
-            let image = UIImage(named: photos[i])
-            imageViews[i] = UIImageView(image: image)
-            let imageHeight = getImageHight(imageSource: image!)
-            imageViews[i].frame = CGRect(x: CGFloat(i) * frameWidth, y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
-            view.addSubview(imageViews[i])
-        }
+        let image = UIImage(named: photos[0])
+        imageViews[0] = UIImageView(image: image)
+        let imageHeight = getImageHight(imageSource: image!)
+        imageViews[0].frame = CGRect(x: 0, y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
+        view.addSubview(imageViews[0])
         
         let swipeLeft =  UISwipeGestureRecognizer(target: self, action: #selector(swipeLeft(_:)))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
@@ -51,78 +48,71 @@ class PhotoController: UIViewController {
         let photoWidth = imageSource.size.width
         let photoHeight = imageSource.size.height
         let ratio = frameWidth / photoWidth
-        
         let imageHeight = photoHeight * ratio
         
         return imageHeight
     }
     
-    var animator: UIViewPropertyAnimator!
-    
-    @objc func swipeLeft(_ recognizer: UISwipeGestureRecognizer) {
+    func listAnimation(left: Bool) {
+        if animationInProgress { return }
+        animationInProgress = true
+        let value = left ? 1 : -1
+     
+        let swipeLeftExpression = self.index < self.photos.count - 1
+        let swipeRightExpression = self.index > 0
         
-        if(self.index < self.photos.count - 1) {
-
+        let expression = left ? swipeLeftExpression : swipeRightExpression
+        
+        if expression {
+            let image = UIImage(named: photos[index + value])
+            
+            imageViews[hiddenImageIndex] = UIImageView()
+            imageViews[hiddenImageIndex].image = image
+            let imageHeight = getImageHight(imageSource: image!)
+            imageViews[hiddenImageIndex].frame = CGRect(x: frameWidth * CGFloat(value), y: (frameHeight - imageHeight) / 2, width: frameWidth, height: imageHeight)
+            view.addSubview(imageViews[hiddenImageIndex])
+            
             UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
                 //уменьшаем отображаемую картинку
+                //hiddenImageIndex ^ 1 вычисляет отображаемую картинку, либо 0, либо 1
                 UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
-                    self.imageViews[self.index].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
+                    self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
                 })
                 //отодвигаем отображаемую картинку
                 UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 1, animations: {
-                    self.imageViews[self.index].center.x -= self.frameHeight
-                })
-                //возвращаем масштаб отодвинутой картинки
-                UIView.addKeyframe(withRelativeStartTime: 1, relativeDuration: 1, animations: {
-                    self.imageViews[self.index].transform = CGAffineTransform(scaleX: 1, y: 1)
+                    self.imageViews[self.hiddenImageIndex ^ 1].frame.origin.x = self.frameHeight * -CGFloat(value)
                 })
                 //сдвигаем новую картинку на место отображаемой
                 UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 1, animations: {
-                    self.imageViews[self.index + 1].center.x = self.frameWidth / 2
+                    self.imageViews[self.hiddenImageIndex].frame.origin.x = 0
                 })
-                self.index += 1
-            }, completion: nil)
+            }, completion: { (true) in
+                self.imageViews[self.hiddenImageIndex ^ 1].removeFromSuperview()
+                self.index += value
+                self.hiddenImageIndex ^= 1
+                self.animationInProgress = false
+            })
         } else {
-            UIView.animate(withDuration: 0.33, animations: {
-                self.imageViews[self.index].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
-            }) { (true) in
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.imageViews[self.index].transform = CGAffineTransform(scaleX: 1, y: 1)
+            UIView.animateKeyframes(withDuration: 0.43, delay: 0, options: .calculationModeLinear, animations: {
+                //уменьшаем отображаемую картинку
+                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
+                    self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
                 })
-            }
+                //возварщаем масштаб картинки
+                UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 0.43, animations: {
+                    self.imageViews[self.hiddenImageIndex ^ 1].transform = CGAffineTransform(scaleX: 1, y: 1)
+                })
+            }, completion: { (true) in
+                self.animationInProgress = false
+            })
         }
     }
-
+    
+    @objc func swipeLeft(_ recognizer: UISwipeGestureRecognizer) {
+        listAnimation(left: true)
+    }
+    
     @objc func swipeRight(_ recognizer: UISwipeGestureRecognizer) {
-        
-        if(self.index > 0) {
-            
-            UIView.animateKeyframes(withDuration: 1, delay: 0, options: .calculationModeLinear, animations: {
-                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.33, animations: {
-                    self.imageViews[self.index].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
-                })
-            
-                UIView.addKeyframe(withRelativeStartTime: 0.33, relativeDuration: 1, animations: {
-                    self.imageViews[self.index].center.x += self.frameHeight
-                })
-            
-                UIView.addKeyframe(withRelativeStartTime: 1, relativeDuration: 1, animations: {
-                    self.imageViews[self.index].transform = CGAffineTransform(scaleX: 1, y: 1)
-                })
-            
-                UIView.addKeyframe(withRelativeStartTime: 0.2, relativeDuration: 1, animations: {
-                    self.imageViews[self.index - 1].center.x = self.frameWidth / 2
-                })
-                self.index -= 1
-        }, completion: nil)
-        } else {
-            UIView.animate(withDuration: 0.33, animations: {
-                self.imageViews[self.index].transform = CGAffineTransform(scaleX: self.scale, y: self.scale)
-            }) { (true) in
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.imageViews[self.index].transform = CGAffineTransform(scaleX: 1, y: 1)
-                })
-            }
-        }
+        listAnimation(left: false)
     }
 }

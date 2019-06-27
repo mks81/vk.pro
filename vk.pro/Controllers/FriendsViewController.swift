@@ -51,34 +51,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func createRefreshControl() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.backgroundColor = .clear
-        refreshControl?.tintColor = .clear
-        
-        var step = -30
-        for _ in 1...3 {
-            
-            let shape = CAShapeLayer()
-            refreshControl?.layer.addSublayer(shape)
-            shape.fillColor = UIColor.gray.cgColor
-            shape.opacity = 0
-            
-            let rect = refreshControl!.bounds
-            let circlePath = UIBezierPath(arcCenter: CGPoint(x: rect.width/2+CGFloat(step),y: rect.height/2), radius: CGFloat(10), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
-            
-            shape.path = circlePath.cgPath
-            
-            let animation = CABasicAnimation()
-            animation.duration = 1
-            animation.repeatCount = .greatestFiniteMagnitude
-            animation.autoreverses = true
-            animation.fromValue = CGFloat(0)
-            animation.toValue = CGFloat(1)
-            animation.isRemovedOnCompletion = false
-            shape.add(animation, forKey: "opacity")
-            
-            step += 30
-        }
+        refreshControl = CustomRefreshControl(frame: UIRefreshControl().frame)
         
         refreshControl!.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
@@ -169,9 +142,9 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let photoController = segue.destination as! PhotoController
+        let photoViewController = segue.destination as! PhotoViewController
         let cell = sender as! UserCell
         let indexPath = tableView.indexPath(for: cell)
-        photoController.photo = items[indexPath!.section][indexPath!.row].photo
+        photoViewController.photo = items[indexPath!.section][indexPath!.row].photo
     }
 }

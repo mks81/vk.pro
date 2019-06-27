@@ -17,6 +17,10 @@
 		0520C9F1229018E500C04D76 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0520C9F0229018E500C04D76 /* GroupCell.swift */; };
 		0520C9F622901BE900C04D76 /* FindGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0520C9F522901BE900C04D76 /* FindGroupViewController.swift */; };
 		057E335722B7AB1A00E86EAB /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E335622B7AB1A00E86EAB /* PhotoController.swift */; };
+		057E335B22BB69C200E86EAB /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E335A22BB69C200E86EAB /* CustomAnimator.swift */; };
+		057E335D22BB845300E86EAB /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E335C22BB845300E86EAB /* CustomNavigationController.swift */; };
+		057E335F22BCAE3D00E86EAB /* CustomRefreshControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E335E22BCAE3D00E86EAB /* CustomRefreshControl.swift */; };
+		057E336122BD1CBD00E86EAB /* CustomInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E336022BD1CBD00E86EAB /* CustomInteractiveTransition.swift */; };
 		0589AA07228BF0FC00B04176 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0589AA06228BF0FC00B04176 /* AppDelegate.swift */; };
 		0589AA0C228BF0FC00B04176 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0589AA0A228BF0FC00B04176 /* Main.storyboard */; };
 		0589AA0E228BF10100B04176 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0589AA0D228BF10100B04176 /* Assets.xcassets */; };
@@ -40,6 +44,10 @@
 		0520C9F0229018E500C04D76 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		0520C9F522901BE900C04D76 /* FindGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindGroupViewController.swift; sourceTree = "<group>"; };
 		057E335622B7AB1A00E86EAB /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
+		057E335A22BB69C200E86EAB /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
+		057E335C22BB845300E86EAB /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		057E335E22BCAE3D00E86EAB /* CustomRefreshControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRefreshControl.swift; sourceTree = "<group>"; };
+		057E336022BD1CBD00E86EAB /* CustomInteractiveTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomInteractiveTransition.swift; sourceTree = "<group>"; };
 		0589AA03228BF0FC00B04176 /* vk.pro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = vk.pro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0589AA06228BF0FC00B04176 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0589AA0B228BF0FC00B04176 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -98,6 +106,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		057E335922BB694700E86EAB /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				057E335A22BB69C200E86EAB /* CustomAnimator.swift */,
+				057E335C22BB845300E86EAB /* CustomNavigationController.swift */,
+				057E336022BD1CBD00E86EAB /* CustomInteractiveTransition.swift */,
+			);
+			path = Transitions;
+			sourceTree = "<group>";
+		};
 		0589A9FA228BF0FC00B04176 = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +135,7 @@
 		0589AA05228BF0FC00B04176 /* vk.pro */ = {
 			isa = PBXGroup;
 			children = (
+				057E335922BB694700E86EAB /* Transitions */,
 				0589AA06228BF0FC00B04176 /* AppDelegate.swift */,
 				050555B9229A94FE002B0575 /* Views */,
 				059E19B52295275700651FF2 /* Models */,
@@ -127,6 +146,7 @@
 				0589AA0F228BF10100B04176 /* LaunchScreen.storyboard */,
 				0589AA12228BF10100B04176 /* Info.plist */,
 				050555BE229AF5C9002B0575 /* LikesControl.swift */,
+				057E335E22BCAE3D00E86EAB /* CustomRefreshControl.swift */,
 			);
 			path = vk.pro;
 			sourceTree = "<group>";
@@ -214,8 +234,10 @@
 			files = (
 				059E19B4229526DF00651FF2 /* GroupModel.swift in Sources */,
 				050555BB229A975B002B0575 /* AvatarView.swift in Sources */,
+				057E336122BD1CBD00E86EAB /* CustomInteractiveTransition.swift in Sources */,
 				059E19B72295283E00651FF2 /* UserModel.swift in Sources */,
 				05BE3AB722A95F3300A59A8D /* NewsViewController.swift in Sources */,
+				057E335F22BCAE3D00E86EAB /* CustomRefreshControl.swift in Sources */,
 				0520C9EC2290129900C04D76 /* GroupViewController.swift in Sources */,
 				05BE3AB522A950DB00A59A8D /* NewsCell.swift in Sources */,
 				050555BF229AF5C9002B0575 /* LikesControl.swift in Sources */,
@@ -223,11 +245,13 @@
 				05BE3ABB22AA52C200A59A8D /* NewsModel.swift in Sources */,
 				0520C9EF229018BF00C04D76 /* UserCell.swift in Sources */,
 				0520C9F1229018E500C04D76 /* GroupCell.swift in Sources */,
+				057E335B22BB69C200E86EAB /* CustomAnimator.swift in Sources */,
 				0520C9F622901BE900C04D76 /* FindGroupViewController.swift in Sources */,
 				0520C9EA2290113800C04D76 /* FriendsViewController.swift in Sources */,
 				0589AA07228BF0FC00B04176 /* AppDelegate.swift in Sources */,
 				057E335722B7AB1A00E86EAB /* PhotoController.swift in Sources */,
 				050555B422973200002B0575 /* PhotoViewController.swift in Sources */,
+				057E335D22BB845300E86EAB /* CustomNavigationController.swift in Sources */,
 				050555B62297327C002B0575 /* PhotoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
