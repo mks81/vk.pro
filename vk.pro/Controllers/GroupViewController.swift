@@ -17,22 +17,24 @@ class GroupViewController: UITableViewController, UISearchBarDelegate {
         GroupModel(name: "Книга рекордов", photo: "book")
     ]
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
     var searchActive = false
     var filtered = [GroupModel]()
     
     @IBAction func unwindToGroup(unwindSeque: UIStoryboardSegue) {
-        //tableView.reloadData()
-        //tableView.insertRows(at: [IndexPath(item: groups.count - 1, section: 0)], with: .automatic)
     }
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let findGroupController = segue.destination as? FindGroupViewController else { return }
+        findGroupController.completionBlock = {group in
+            print(group.name)
+        }
     }
 
     // MARK: - SearchBar delegate
-    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
     }
@@ -58,12 +60,6 @@ class GroupViewController: UITableViewController, UISearchBarDelegate {
     }
     
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-  
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return searchActive ? filtered.count : groups.count
