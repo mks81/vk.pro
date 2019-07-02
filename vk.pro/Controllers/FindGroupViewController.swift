@@ -18,25 +18,15 @@ class FindGroupViewController: UITableViewController {
         GroupModel(name: "Английский для лентяев", photo: "english")
     ]
 
+    var completionBlock: ((GroupModel) ->())?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return groups.count
     }
 
@@ -58,8 +48,6 @@ class FindGroupViewController: UITableViewController {
     }
     
     //MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "UnwindToGroupSegue",
             let groupController = segue.destination as? GroupViewController,
@@ -69,7 +57,9 @@ class FindGroupViewController: UITableViewController {
             
             groupController.groups.append(groups[indexPath.row])
             groupController.tableView.insertRows(at: [IndexPath(item: groupController.groups.count - 1, section: 0)], with: .automatic)
+            
+            //я просто передал группу в контроллер для вывода в консоль, потому как не думаю что в данном случае этот вариант удобней
+            completionBlock?(groups[indexPath.row])
         }
     }
- 
 }
