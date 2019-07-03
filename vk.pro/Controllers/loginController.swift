@@ -21,7 +21,7 @@ class loginController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        logoutVK()
+        //logoutVK()
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -62,9 +62,11 @@ class loginController: UIViewController, WKNavigationDelegate {
         guard let token = params["access_token"] else { return }
         
         Session.instance.token = token
-        AF.request("https://api.vk.com/method/groups.get?extended=1&access_token=\(Session.instance.token)&v=5.95").responseJSON { (response) in
-            print(response.value)
-        }
+        
+        getFriends()
+        getPhotos(ownerId: "1")
+        getGroups()
+        searchGroup(keyword: "путешествия")
         
         decisionHandler(.cancel)
     }
@@ -79,4 +81,74 @@ class loginController: UIViewController, WKNavigationDelegate {
             )
         }
     }
+    
+    func getFriends()  {
+       
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/friends.get"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "extended", value: "1"),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "v", value: "5.95")
+        ]
+        
+        AF.request(urlComponents).responseJSON { (response) in
+            print(response.value)
+        }
+    }
+    
+    func getPhotos(ownerId: String) {
+       
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/photos.getAll"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "owner_id", value: ownerId),
+            URLQueryItem(name: "extended", value: "1"),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "v", value: "5.95")
+        ]
+        
+        AF.request(urlComponents).responseJSON { (response) in
+            print(response.value)
+        }
+    }
+    
+    func getGroups() {
+       
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/groups.get"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "extended", value: "1"),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "v", value: "5.95")
+        ]
+        
+        AF.request(urlComponents).responseJSON { (response) in
+            print(response.value)
+        }
+    }
+    
+    func searchGroup(keyword: String) {
+       
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/groups.search"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "q", value: keyword),
+            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "v", value: "5.95")
+        ]
+        
+        AF.request(urlComponents).responseJSON { (response) in
+            print(response.value)
+        }
+    }
 }
+
