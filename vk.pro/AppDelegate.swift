@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         //Temp
-        _ = Session.instance
+        //_ = Session.instance
         
         return true
     }
