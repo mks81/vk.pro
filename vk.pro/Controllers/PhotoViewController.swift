@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import SDWebImage
 
 private let reuseIdentifier = "PhotoCell"
 
 class PhotoViewController: UICollectionViewController , UICollectionViewDelegateFlowLayout {
     
+    var photos: [Photo] = []
+    
     let cellsCount = 2
     let spacing: CGFloat = 2
-    
-    var photo = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,14 +28,14 @@ class PhotoViewController: UICollectionViewController , UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
   
-        return 10
+        return photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
     
-        cell.photo.image = UIImage(named: photo)
+        cell.photo.sd_setImage(with: URL(string: photos[indexPath.row].photo), placeholderImage: UIImage(named: "vk"))
     
         return cell
     }
@@ -52,7 +53,7 @@ class PhotoViewController: UICollectionViewController , UICollectionViewDelegate
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let photoController = segue.destination as! PhotoController
-        photoController.photo = photo
+        //let photoController = segue.destination as! PhotoController
+        //photoController.photo = photo
     }
 }

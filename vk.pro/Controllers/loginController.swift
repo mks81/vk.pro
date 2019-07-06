@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import Alamofire
+import AlamofireObjectMapper
 
 class loginController: UIViewController, WKNavigationDelegate {
 
@@ -63,12 +64,10 @@ class loginController: UIViewController, WKNavigationDelegate {
         
         Session.instance.token = token
         
-        getFriends()
-        getPhotos(ownerId: "1")
-        getGroups()
-        searchGroup(keyword: "путешествия")
-        
         decisionHandler(.cancel)
+        
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+        self.present(vc, animated: true, completion: nil)
     }
     
     func logoutVK() {
@@ -79,75 +78,6 @@ class loginController: UIViewController, WKNavigationDelegate {
                 for: records.filter { $0.displayName.contains("vk")},
                 completionHandler: { }
             )
-        }
-    }
-    
-    func getFriends()  {
-       
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/friends.get"
-        urlComponents.queryItems = [
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "access_token", value: Session.instance.token),
-            URLQueryItem(name: "v", value: "5.95")
-        ]
-        
-        AF.request(urlComponents).responseJSON { (response) in
-            print(response.value)
-        }
-    }
-    
-    func getPhotos(ownerId: String) {
-       
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/photos.getAll"
-        urlComponents.queryItems = [
-            URLQueryItem(name: "owner_id", value: ownerId),
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "access_token", value: Session.instance.token),
-            URLQueryItem(name: "v", value: "5.95")
-        ]
-        
-        AF.request(urlComponents).responseJSON { (response) in
-            print(response.value)
-        }
-    }
-    
-    func getGroups() {
-       
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/groups.get"
-        urlComponents.queryItems = [
-            URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "access_token", value: Session.instance.token),
-            URLQueryItem(name: "v", value: "5.95")
-        ]
-        
-        AF.request(urlComponents).responseJSON { (response) in
-            print(response.value)
-        }
-    }
-    
-    func searchGroup(keyword: String) {
-       
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/groups.search"
-        urlComponents.queryItems = [
-            URLQueryItem(name: "q", value: keyword),
-            URLQueryItem(name: "access_token", value: Session.instance.token),
-            URLQueryItem(name: "v", value: "5.95")
-        ]
-        
-        AF.request(urlComponents).responseJSON { (response) in
-            print(response.value)
         }
     }
 }

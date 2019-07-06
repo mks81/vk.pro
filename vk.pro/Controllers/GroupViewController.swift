@@ -7,33 +7,27 @@
 //
 
 import UIKit
+import SDWebImage
 
 class GroupViewController: UITableViewController, UISearchBarDelegate {
 
-    var groups: [GroupModel] = [
-        GroupModel(name: "iOS dev.", photo: "ios"),
-        GroupModel(name: "Новости", photo: "news"),
-        GroupModel(name: "/dev/null", photo: "dev"),
-        GroupModel(name: "Книга рекордов", photo: "book")
-    ]
+    var groups: [Group] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Session.instance.getGroups { [weak self] (groups) in
+            self?.groups = groups
+            self?.tableView.reloadData()
+        }
     }
     
     var searchActive = false
-    var filtered = [GroupModel]()
+    var filtered = [Group]()
     
     @IBAction func unwindToGroup(unwindSeque: UIStoryboardSegue) {
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let findGroupController = segue.destination as? FindGroupViewController else { return }
-        findGroupController.completionBlock = {group in
-            print(group.name)
-        }
-    }
-
     // MARK: - SearchBar delegate
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
@@ -70,7 +64,7 @@ class GroupViewController: UITableViewController, UISearchBarDelegate {
 
         let group = searchActive ? filtered[indexPath.row] : groups[indexPath.row]
         cell.name.text = group.name
-        cell.photo.image = UIImage(named: group.photo)
+        cell.photo.sd_setImage(with: URL(string: group.photo), placeholderImage: UIImage(named: "vk"))
 
         return cell
     }

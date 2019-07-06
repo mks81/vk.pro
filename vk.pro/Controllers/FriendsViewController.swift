@@ -7,47 +7,37 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FriendsViewController: UITableViewController, UISearchBarDelegate {
     
-    var friends: [UserModel] = [
-        UserModel(name: "Виталий Бутерин", photo: "buterin"),
-        UserModel(name: "Владимир Доброжинский", photo: "vovan"),
-        UserModel(name: "Надежда Адаменко", photo: "nadya"),
-        UserModel(name: "Ирина Стирманова", photo: "ira"),
-        UserModel(name: "Денис Хрисанфов", photo: "den"),
-        UserModel(name: "Elon Musk", photo: "musk"),
-        UserModel(name: "Владимир Путин", photo: "putin"),
-        UserModel(name: "Василий Жуков", photo: "vasek"),
-        UserModel(name: "Евгения Иванова", photo: "phuket"),
-        UserModel(name: "Роман Михайлов", photo: "roma"),
-        UserModel(name: "Павел Дуров", photo: "durov")
-        ].sorted(by: {$0.name.split(separator: " ")[1] < $1.name.split(separator: " ")[1]})
+    var friends: [User] = []
     
     var titleForSection = [String]()
-    var items = [[UserModel]]()
+    var items = [[User]]()
     
     var searchActive = false
-    var filtered = [UserModel]()
+    var filtered = [User]()
 
     func prepareData() {
         var section = 0
-        titleForSection.append(String(friends[0].name.split(separator: " ")[1].first!))
-        items.append([UserModel]())
+        titleForSection.append(String(friends[0].lastName.first ?? friends[0].firstName.first!))
+        items.append([User]())
         items[section].append(friends[0])
         
         for row in 1..<friends.count {
-            let leftValue = friends[row - 1].name.split(separator: " ")[1].first
-            let rightValue = friends[row].name.split(separator: " ")[1].first
+            let leftValue = friends[row - 1].lastName.first ?? friends[row - 1].firstName.first
+            let rightValue = friends[row].lastName.first ?? friends[row].firstName.first
             if leftValue == rightValue {
                 items[section].append(friends[row])
             } else {
                 titleForSection.append(String(rightValue!))
                 section += 1
-                items.append([UserModel]())
+                items.append([User]())
                 items[section].append(friends[row])
             }
         }
+        tableView.reloadData()
     }
     
     func createRefreshControl() {
@@ -60,7 +50,11 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         
         createRefreshControl()
-        prepareData()
+        Session.instance.getFriends { [weak self] (users) in
+            self!.friends = users.sorted(by: {$0.lastName < $1.lastName})
+            self!.friends = (self?.friends.filter { !$0.firstName.contains("DELETED")})!
+            self!.prepareData()
+        }
     }
 
     @objc func refresh(refreshControl: UIRefreshControl) {
@@ -86,8 +80,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        filtered = friends.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+        filtered = friends.filter { $0.firstName.lowercased().contains(searchText.lowercased()) || $0.lastName.lowercased().contains(searchText.lowercased())}
         
         searchActive = searchText.count == 0 ? false : true
         tableView.reloadData()
@@ -124,8 +117,8 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         let section = indexPath.section
         let row = indexPath.row
         let friend = searchActive ? filtered[row] : items[section][row]
-        cell.name.text = friend.name
-        cell.photo.image = UIImage(named: friend.photo)
+        cell.name.text = "\(friend.firstName) \(friend.lastName)"
+        cell.photo!.sd_setImage(with: URL(string: friend.photo), placeholderImage: UIImage(named: "vk"))
         
         return cell
     }
@@ -145,6 +138,10 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         let photoViewController = segue.destination as! PhotoViewController
         let cell = sender as! UserCell
         let indexPath = tableView.indexPath(for: cell)
-        photoViewController.photo = items[indexPath!.section][indexPath!.row].photo
+        let userId = items[indexPath!.section][indexPath!.row].id
+        Session.instance.getPhotos(ownerId: userId) { (photos) in
+            print(photos.first?.photo)
+            photoViewController.photos = photos
+        }
     }
 }
