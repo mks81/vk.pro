@@ -25,7 +25,7 @@ class Session {
         urlComponents.path = "/method/friends.get"
         urlComponents.queryItems = [
             URLQueryItem(name: "fields", value: "id,photo_50,first_name,last_name"),
-            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.95")
         ]
         
@@ -46,11 +46,11 @@ class Session {
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
-        urlComponents.path = "/method/photos.getUserPhotos"
+        urlComponents.path = "/method/photos.getAll"
         urlComponents.queryItems = [
             URLQueryItem(name: "owner_id", value: "\(ownerId)"),
             URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.95")
         ]
         
@@ -74,7 +74,7 @@ class Session {
         urlComponents.path = "/method/groups.get"
         urlComponents.queryItems = [
             URLQueryItem(name: "extended", value: "1"),
-            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.95")
         ]
         
@@ -98,7 +98,7 @@ class Session {
         urlComponents.path = "/method/groups.search"
         urlComponents.queryItems = [
             URLQueryItem(name: "q", value: keyword),
-            URLQueryItem(name: "access_token", value: Session.instance.token),
+            URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.95")
         ]
         

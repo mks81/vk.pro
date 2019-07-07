@@ -167,6 +167,7 @@
                                     <constraint firstItem="N1o-1v-cGu" firstAttribute="top" secondItem="WEF-Dm-3RQ" secondAttribute="top" id="b9a-kH-aQ3"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="likesControl" destination="r8u-ek-JZz" id="iyM-BQ-hop"/>
                                     <outlet property="photo" destination="N1o-1v-cGu" id="nWU-Gb-47M"/>
                                     <segue destination="1f4-0H-TjR" kind="show" id="Haz-x0-M5k"/>
                                 </connections>
@@ -594,7 +595,7 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="KBb-eq-PCD" id="urw-y6-gtl"/>
-                        <segue destination="Rsl-vK-jYi" kind="presentation" id="Gju-ML-Gvb"/>
+                        <segue destination="Rsl-vK-jYi" kind="presentation" identifier="LoginSegue" id="Gju-ML-Gvb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNi-Qn-FW7" userLabel="First Responder" sceneMemberID="firstResponder"/>

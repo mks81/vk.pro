@@ -22,8 +22,8 @@ class LikesControl: UIControl {
     
     @IBOutlet weak var likeLebel: UILabel!
     
-    var alreadyLiked = Bool.random()
-    var likesCount = Int.random(in: 0...99)
+    var alreadyLiked = false
+    var likesCount = 0
     
     override init(frame: CGRect) {
         super.init(frame: frame)

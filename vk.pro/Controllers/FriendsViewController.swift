@@ -138,10 +138,10 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         let photoViewController = segue.destination as! PhotoViewController
         let cell = sender as! UserCell
         let indexPath = tableView.indexPath(for: cell)
-        let userId = items[indexPath!.section][indexPath!.row].id
-        Session.instance.getPhotos(ownerId: userId) { (photos) in
-            print(photos.first?.photo)
-            photoViewController.photos = photos
-        }
+        let section = indexPath!.section
+        let row = indexPath!.row
+        let friend = searchActive ? filtered[row] : items[section][row]
+        let userId = friend.id
+        photoViewController.ownerId = userId
     }
 }

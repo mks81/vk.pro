@@ -13,6 +13,7 @@ private let reuseIdentifier = "PhotoCell"
 
 class PhotoViewController: UICollectionViewController , UICollectionViewDelegateFlowLayout {
     
+    var ownerId = 0
     var photos: [Photo] = []
     
     let cellsCount = 2
@@ -21,6 +22,11 @@ class PhotoViewController: UICollectionViewController , UICollectionViewDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        Session.instance.getPhotos(ownerId: ownerId) {[weak self] (photos) in
+            self!.photos = photos
+            self!.collectionView.reloadData()
+        }
+        
         guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return }
         layout.minimumInteritemSpacing = spacing
         layout.minimumLineSpacing = spacing
@@ -35,8 +41,11 @@ class PhotoViewController: UICollectionViewController , UICollectionViewDelegate
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as? PhotoCell else { return UICollectionViewCell() }
     
-        cell.photo.sd_setImage(with: URL(string: photos[indexPath.row].photo), placeholderImage: UIImage(named: "vk"))
-    
+        let photo = photos[indexPath.item]
+        cell.photo.sd_setImage(with: URL(string: (photo.sizes[2].url)), placeholderImage: UIImage(named: "vk"))
+        cell.likesControl.likesCount = photo.likes["count"] ?? 0
+        cell.likesControl.alreadyLiked = photo.likes["user_likes"] ?? 0 == 1
+        
         return cell
     }
 
@@ -54,6 +63,6 @@ class PhotoViewController: UICollectionViewController , UICollectionViewDelegate
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         //let photoController = segue.destination as! PhotoController
-        //photoController.photo = photo
+        //photoController.photos = photos
     }
 }

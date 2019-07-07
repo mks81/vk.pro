@@ -24,7 +24,6 @@ class PhotoController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photos.insert(photo, at: 0)
         
         frameWidth = view.bounds.width
         frameHeight = view.bounds.height
