@@ -32,6 +32,10 @@
 		05BE3AB722A95F3300A59A8D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3AB622A95F3300A59A8D /* NewsViewController.swift */; };
 		05BE3ABB22AA52C200A59A8D /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3ABA22AA52C200A59A8D /* NewsModel.swift */; };
 		05BE3ADE22C556D100A59A8D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3ADD22C556D100A59A8D /* Session.swift */; };
+		05C76AE222D0875C0080D583 /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C76AE122D0875C0080D583 /* VKResponse.swift */; };
+		05C76AE422D08ABE0080D583 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C76AE322D08ABE0080D583 /* Group.swift */; };
+		05C76AE622D097AC0080D583 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C76AE522D097AC0080D583 /* User.swift */; };
+		05C76AE822D0D4A80080D583 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C76AE722D0D4A80080D583 /* Photo.swift */; };
 		F509967195732193734FE0ED /* Pods_vk_pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D9C2DFBA9E948AB204C7A578 /* Pods_vk_pro.framework */; };
 /* End PBXBuildFile section */
 
@@ -63,6 +67,10 @@
 		05BE3AB622A95F3300A59A8D /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		05BE3ABA22AA52C200A59A8D /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		05BE3ADD22C556D100A59A8D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		05C76AE122D0875C0080D583 /* VKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKResponse.swift; sourceTree = "<group>"; };
+		05C76AE322D08ABE0080D583 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		05C76AE522D097AC0080D583 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		05C76AE722D0D4A80080D583 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		31374E6F434545D0DE0EC3AB /* Pods-vk.pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk.pro.debug.xcconfig"; path = "Target Support Files/Pods-vk.pro/Pods-vk.pro.debug.xcconfig"; sourceTree = "<group>"; };
 		D9C2DFBA9E948AB204C7A578 /* Pods_vk_pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vk_pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E2E5DA56CD3F5854C13C0762 /* Pods-vk.pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk.pro.release.xcconfig"; path = "Target Support Files/Pods-vk.pro/Pods-vk.pro.release.xcconfig"; sourceTree = "<group>"; };
@@ -144,6 +152,7 @@
 		0589AA05228BF0FC00B04176 /* vk.pro */ = {
 			isa = PBXGroup;
 			children = (
+				05C76ADE22D075FD0080D583 /* VKObjects */,
 				05BE3ADC22C5557200A59A8D /* Controls */,
 				057E335922BB694700E86EAB /* Transitions */,
 				0589AA06228BF0FC00B04176 /* AppDelegate.swift */,
@@ -177,6 +186,17 @@
 				057E335E22BCAE3D00E86EAB /* CustomRefreshControl.swift */,
 			);
 			path = Controls;
+			sourceTree = "<group>";
+		};
+		05C76ADE22D075FD0080D583 /* VKObjects */ = {
+			isa = PBXGroup;
+			children = (
+				05C76AE122D0875C0080D583 /* VKResponse.swift */,
+				05C76AE322D08ABE0080D583 /* Group.swift */,
+				05C76AE522D097AC0080D583 /* User.swift */,
+				05C76AE722D0D4A80080D583 /* Photo.swift */,
+			);
+			path = VKObjects;
 			sourceTree = "<group>";
 		};
 		740B0CDA377D1B05903178B2 /* Frameworks */ = {
@@ -297,12 +317,18 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-vk.pro/Pods-vk.pro-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -319,9 +345,13 @@
 				059E19B4229526DF00651FF2 /* GroupModel.swift in Sources */,
 				050555BB229A975B002B0575 /* AvatarView.swift in Sources */,
 				057E336122BD1CBD00E86EAB /* CustomInteractiveTransition.swift in Sources */,
+				05C76AE622D097AC0080D583 /* User.swift in Sources */,
+				05C76AE422D08ABE0080D583 /* Group.swift in Sources */,
 				059E19B72295283E00651FF2 /* UserModel.swift in Sources */,
+				05C76AE822D0D4A80080D583 /* Photo.swift in Sources */,
 				05BE3AB722A95F3300A59A8D /* NewsViewController.swift in Sources */,
 				057E335F22BCAE3D00E86EAB /* CustomRefreshControl.swift in Sources */,
+				05C76AE222D0875C0080D583 /* VKResponse.swift in Sources */,
 				0520C9EC2290129900C04D76 /* GroupViewController.swift in Sources */,
 				05BE3AB522A950DB00A59A8D /* NewsCell.swift in Sources */,
 				050555BF229AF5C9002B0575 /* LikesControl.swift in Sources */,

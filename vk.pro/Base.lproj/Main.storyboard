@@ -167,6 +167,7 @@
                                     <constraint firstItem="N1o-1v-cGu" firstAttribute="top" secondItem="WEF-Dm-3RQ" secondAttribute="top" id="b9a-kH-aQ3"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="likesControl" destination="r8u-ek-JZz" id="iyM-BQ-hop"/>
                                     <outlet property="photo" destination="N1o-1v-cGu" id="nWU-Gb-47M"/>
                                     <segue destination="1f4-0H-TjR" kind="show" id="Haz-x0-M5k"/>
                                 </connections>
@@ -274,9 +275,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="XtG-nZ-hRU">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="dAO-It-qHP" id="Qfg-H4-lxU"/>
+                            </connections>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GroupCell" id="FfP-Rx-5Vg" customClass="GroupCell" customModule="vk_pro" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="72" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FfP-Rx-5Vg" id="she-3b-Fby">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -586,6 +595,7 @@
                     </view>
                     <connections>
                         <outlet property="webView" destination="KBb-eq-PCD" id="urw-y6-gtl"/>
+                        <segue destination="Rsl-vK-jYi" kind="presentation" identifier="LoginSegue" id="Gju-ML-Gvb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nNi-Qn-FW7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -595,7 +605,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="U4w-Pa-Nuz">
             <objects>
-                <tabBarController id="Rsl-vK-jYi" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="Rsl-vK-jYi" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="tPx-V8-ke3"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GjT-9Z-GBz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>

@@ -10,6 +10,7 @@ import UIKit
 
 class PhotoCell: UICollectionViewCell {
     
+    @IBOutlet weak var likesControl: LikesControl!
     @IBOutlet weak var photo: UIImageView!
 
 }
