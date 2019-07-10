@@ -7,11 +7,13 @@ PODS:
   - SDWebImage (5.0.6):
     - SDWebImage/Core (= 5.0.6)
   - SDWebImage/Core (5.0.6)
+  - SwiftKeychainWrapper (3.4.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.0.0-beta.5)
   - AlamofireObjectMapper (~> 6.1.0)
   - SDWebImage (~> 5.0)
+  - SwiftKeychainWrapper
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -19,13 +21,15 @@ SPEC REPOS:
     - AlamofireObjectMapper
     - ObjectMapper
     - SDWebImage
+    - SwiftKeychainWrapper
 
 SPEC CHECKSUMS:
   Alamofire: cd08a4402bd12cacd0c66f23fb12fec8d6b965e4
   AlamofireObjectMapper: cd819bed60ad326e8920a6c524c19744e15bb237
   ObjectMapper: 70187b8941977c62ccfb423caf6b50be405cabf0
   SDWebImage: 920f1a2ff1ca8296ad34f6e0510a1ef1d70ac965
+  SwiftKeychainWrapper: 6fc49fbf7d4a6b0772917acb0e53a1639f6078d6
 
-PODFILE CHECKSUM: 1b48d28aa07aab0c4664b34180d33cfa180c3553
+PODFILE CHECKSUM: b38e11c510da06b580eae905954769f78664286c
 
 COCOAPODS: 1.6.1
