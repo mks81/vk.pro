@@ -66,8 +66,7 @@ class loginController: UIViewController, WKNavigationDelegate {
         
         decisionHandler(.cancel)
         
-        let vc = self.storyboard?.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-        self.present(vc, animated: true, completion: nil)
+        performSegue(withIdentifier: "LoginSegue", sender: nil)
     }
     
     func logoutVK() {
