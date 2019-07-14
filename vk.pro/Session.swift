@@ -8,13 +8,22 @@
 
 import UIKit
 import Alamofire
+import SwiftKeychainWrapper
 
 class Session {
     static let instance = Session()
     
-    var token: String = ""
-    var userId: Int = 0
-    
+    var token: String = "" {
+        didSet {
+            KeychainWrapper.standard.set(token, forKey: "token")
+        }
+    }
+    var userId: Int = 0  {
+        didSet {
+            UserDefaults.standard.set(userId, forKey: "userId")
+        }
+    }
+        
     private init() {}
     
     func getFriends(completionBlock: @escaping ([User]) -> Void)  {

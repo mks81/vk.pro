@@ -9,5 +9,6 @@ target 'vk.pro' do
   pod 'Alamofire', '~> 5.0.0-beta.5'
   pod 'AlamofireObjectMapper', '~> 6.1.0'
   pod 'SDWebImage', '~> 5.0'
+  pod 'SwiftKeychainWrapper'
 
 end
