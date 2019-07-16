@@ -9,25 +9,69 @@
 import UIKit
 import SDWebImage
 
-class GroupViewController: UITableViewController, UISearchBarDelegate {
+class GroupViewController: UITableViewController {
 
-    var groups: [Group] = []
+    var groups = [[Group]]()
+    var filtered = [Group]()
+    
+    var searchActive = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        for _ in 0...1 {
+            groups.append([Group]())
+        }
         
         Session.instance.getGroups { [weak self] (groups) in
-            self?.groups = groups
+            self?.groups[0] = groups
             self?.tableView.reloadData()
         }
     }
     
-    var searchActive = false
-    var filtered = [Group]()
-    
-    @IBAction func unwindToGroup(unwindSeque: UIStoryboardSegue) {
+    // MARK: - Table view data source
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return searchActive && section == 1 ? "Глобальный поиск" : nil
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let headerView = view as? UITableViewHeaderFooterView else { return }
+        
+        headerView.textLabel?.textColor = UIColor.gray
+        headerView.backgroundView?.backgroundColor = tableView.backgroundColor?.withAlphaComponent(0.5)
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return searchActive ? 2 : 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+        return searchActive && section == 0 ? filtered.count : groups[section].count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupCell.reuseId, for: indexPath) as? GroupCell else { return UITableViewCell() }
+
+        let section = indexPath.section
+        let row = indexPath.row
+        let group = searchActive && section == 0 ? filtered[row] : groups[section][row]
+        cell.name.text = group.name
+        cell.photo.sd_setImage(with: URL(string: group.photo), placeholderImage: UIImage(named: "vk"))
+
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.transform = CGAffineTransform(translationX: 100, y: 0)
+        UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseOut], animations: {
+            cell.transform = CGAffineTransform(translationX: -100, y: 0)
+        })
+    }
+}
+
+extension GroupViewController: UISearchBarDelegate {
+ 
     // MARK: - SearchBar delegate
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
@@ -47,41 +91,13 @@ class GroupViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        filtered = groups.filter { $0.name.lowercased().contains(searchText.lowercased()) }
-        
+        filtered = groups[0].filter { $0.name.lowercased().contains(searchText.lowercased()) }
+
         searchActive = searchText.count == 0 ? false : true
-        tableView.reloadData()
-    }
-    
-    // MARK: - Table view data source
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return searchActive ? filtered.count : groups.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: GroupCell.reuseId, for: indexPath) as? GroupCell else { return UITableViewCell() }
-
-        let group = searchActive ? filtered[indexPath.row] : groups[indexPath.row]
-        cell.name.text = group.name
-        cell.photo.sd_setImage(with: URL(string: group.photo), placeholderImage: UIImage(named: "vk"))
-
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        cell.transform = CGAffineTransform(translationX: 100, y: 0)
-        UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseOut], animations: {
-            cell.transform = CGAffineTransform(translationX: -100, y: 0)
-        })
-    }
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            
-            groups.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+        Session.instance.searchGroup(keyword: searchText) {[weak self] (groups) in
+            self?.groups[1] = groups
+            self?.tableView.reloadData()
         }
     }
 }
