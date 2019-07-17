@@ -14,8 +14,6 @@ import RealmSwift
 class Session {
     static let instance = Session()
     
-    private var realm = try! Realm()
-    
     var token: String = "" {
         didSet {
             KeychainWrapper.standard.set(token, forKey: "token")
@@ -26,8 +24,13 @@ class Session {
             UserDefaults.standard.set(userId, forKey: "userId")
         }
     }
+    
+    private var realm = try! Realm()
         
-    private init() { deleteAll() }
+    private init() {
+        deleteAll()
+        //print(realm.configuration.fileURL)
+    }
     
     func getFriends(completionBlock: @escaping () -> Void)  {
         
@@ -45,7 +48,7 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                    self.addObjects(array: value.response?.users ?? [])
+                self.addObjects(array: value.response?.users ?? [])
             case .failure(let error):
                 print(error)
             }
@@ -78,7 +81,7 @@ class Session {
         }
     }
     
-    func getGroups(completionBlock: @escaping ([Group]) -> Void)  {
+    func getGroups(completionBlock: @escaping () -> Void)  {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -94,11 +97,11 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                completionBlock(value.response?.groups ?? [])
+                self.addObjects(array: value.response?.groups ?? [])
             case .failure(let error):
                 print(error)
-                completionBlock([])
             }
+            completionBlock()
         }
     }
     

@@ -16,16 +16,32 @@ class GroupViewController: UITableViewController {
     
     var searchActive = false
     
+    func createRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl!.addTarget(self, action: #selector(refresh), for: .valueChanged)
+    }
+    
+    @objc func refresh(refreshControl: UIRefreshControl) {
+        getData()
+    }
+    
+    func getData() {
+        DispatchQueue(label: "background").async {
+            Session.instance.getGroups { [weak self] in
+                self?.groups[0] = Session.instance.getObjects(type: Group.self).sorted(byKeyPath: "name").toArray(ofType: Group.self) as [Group]
+                self?.refreshControl?.endRefreshing()
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
     override func viewDidLoad() {
+        createRefreshControl()
         super.viewDidLoad()
         for _ in 0...1 {
             groups.append([Group]())
         }
-        
-        Session.instance.getGroups { [weak self] (groups) in
-            self?.groups[0] = groups
-            self?.tableView.reloadData()
-        }
+        getData()
     }
     
     // MARK: - Table view data source

@@ -8,17 +8,24 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class Group: Mappable {
-    var id: Int = 0
-    var photo: String = ""
-    var name: String = ""
+class Group: Object, Mappable {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var photo: String = ""
+    @objc dynamic var name: String = ""
     
-    required init?(map: Map) {}
+    required convenience init?(map: Map) {
+        self.init()
+    }
     
     func mapping(map: Map) {
         id <- map["id"]
         photo <- map["photo_50"]
         name <- map["name"]
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }
