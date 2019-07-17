@@ -9,9 +9,12 @@
 import UIKit
 import Alamofire
 import SwiftKeychainWrapper
+import RealmSwift
 
 class Session {
     static let instance = Session()
+    
+    private var realm = try! Realm()
     
     var token: String = "" {
         didSet {
@@ -24,9 +27,9 @@ class Session {
         }
     }
         
-    private init() {}
+    private init() { deleteAll() }
     
-    func getFriends(completionBlock: @escaping ([User]) -> Void)  {
+    func getFriends(completionBlock: @escaping () -> Void)  {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -42,11 +45,11 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                completionBlock(value.response?.users ?? [])
+                    self.addObjects(array: value.response?.users ?? [])
             case .failure(let error):
                 print(error)
-                completionBlock([])
             }
+            completionBlock()
         }
     }
     
@@ -120,6 +123,41 @@ class Session {
                 print(error)
                 completionBlock([])
             }
+        }
+    }
+    
+    // MARK: - Realm
+    func getObjects(type: Object.Type) -> Results<Object> {
+        return realm.objects(type)
+    }
+    
+    func addObjects(array: Array<Object>)   {
+        do {
+            try realm.write {
+                realm.add(array, update: .all)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func deleteAll()  {
+        do {
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func deleteObject(object: Object) {
+        do {
+            try realm.write {
+                realm.delete(object)
+            }
+        } catch {
+            print(error)
         }
     }
 }

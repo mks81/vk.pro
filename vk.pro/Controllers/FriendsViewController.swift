@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import RealmSwift
 
 class FriendsViewController: UITableViewController, UISearchBarDelegate {
     
@@ -19,7 +20,18 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     var searchActive = false
     var filtered = [User]()
 
+    func getData() {
+        DispatchQueue(label: "background").async {
+            Session.instance.getFriends { [weak self] in
+                self?.friends = Session.instance.getObjects(type: User.self).filter("firstName != 'DELETED'").sorted(byKeyPath: "lastName").toArray(ofType: User.self) as [User]
+                self?.prepareData()
+            }
+        }
+    }
+    
     func prepareData() {
+        items = [[User]]()
+        titleForSection = [String]()
         var section = 0
         titleForSection.append(String(friends[0].lastName.first ?? friends[0].firstName.first!))
         items.append([User]())
@@ -37,12 +49,12 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
                 items[section].append(friends[row])
             }
         }
+        refreshControl?.endRefreshing()
         tableView.reloadData()
     }
     
     func createRefreshControl() {
-        refreshControl = CustomRefreshControl(frame: UIRefreshControl().frame)
-        
+        refreshControl = UIRefreshControl() //CustomRefreshControl(frame: UIRefreshControl().frame)
         refreshControl!.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
     
@@ -50,15 +62,11 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         
         createRefreshControl()
-        Session.instance.getFriends { [weak self] (users) in
-            self!.friends = users.sorted(by: {$0.lastName < $1.lastName})
-            self!.friends = (self?.friends.filter { !$0.firstName.contains("DELETED")})!
-            self!.prepareData()
-        }
+        getData()
     }
 
     @objc func refresh(refreshControl: UIRefreshControl) {
-        refreshControl.endRefreshing()
+        getData()
     }
     
     // MARK: - SearchBar delegate
@@ -143,5 +151,18 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         let friend = searchActive ? filtered[row] : items[section][row]
         let userId = friend.id
         photoViewController.ownerId = userId
+    }
+}
+
+extension Results {
+    func toArray<T>(ofType: T.Type) -> [T] {
+        var array = [T]()
+        for i in 0 ..< count {
+            if let result = self[i] as? T {
+                array.append(result)
+            }
+        }
+        
+        return array
     }
 }
