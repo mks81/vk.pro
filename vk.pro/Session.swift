@@ -24,8 +24,6 @@ class Session {
             UserDefaults.standard.set(userId, forKey: "userId")
         }
     }
-    
-    private var realm = try! Realm()
         
     private init() {
         deleteAll()
@@ -131,11 +129,17 @@ class Session {
     
     // MARK: - Realm
     func getObjects(type: Object.Type) -> Results<Object> {
-        return realm.objects(type)
+        do {
+            return try Realm().objects(type)
+        } catch {
+            print(error)
+            return try! Realm().objects(type)
+        }
     }
     
     func addObjects(array: Array<Object>)   {
         do {
+            let realm = try Realm()
             try realm.write {
                 realm.add(array, update: .all)
             }
@@ -146,6 +150,7 @@ class Session {
     
     func deleteAll()  {
         do {
+            let realm = try Realm()
             try realm.write {
                 realm.deleteAll()
             }
@@ -156,6 +161,7 @@ class Session {
     
     func deleteObject(object: Object) {
         do {
+            let realm = try Realm()
             try realm.write {
                 realm.delete(object)
             }

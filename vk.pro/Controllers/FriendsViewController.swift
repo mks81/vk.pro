@@ -21,7 +21,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     var filtered = [User]()
 
     func getData() {
-        DispatchQueue(label: "background").async {
+        DispatchQueue.global().async {
             Session.instance.getFriends { [weak self] in
                 self?.friends = Session.instance.getObjects(type: User.self).filter("firstName != 'DELETED'").sorted(byKeyPath: "lastName").toArray(ofType: User.self) as [User]
                 self?.prepareData()

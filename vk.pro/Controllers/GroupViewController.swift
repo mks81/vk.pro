@@ -26,7 +26,7 @@ class GroupViewController: UITableViewController {
     }
     
     func getData() {
-        DispatchQueue(label: "background").async {
+        DispatchQueue.global().async {
             Session.instance.getGroups { [weak self] in
                 self?.groups[0] = Session.instance.getObjects(type: Group.self).sorted(byKeyPath: "name").toArray(ofType: Group.self) as [Group]
                 self?.refreshControl?.endRefreshing()
