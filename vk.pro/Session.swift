@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftKeychainWrapper
+import RealmSwift
 
 class Session {
     static let instance = Session()
@@ -24,9 +25,12 @@ class Session {
         }
     }
         
-    private init() {}
+    private init() {
+        deleteAll()
+        //print(realm.configuration.fileURL)
+    }
     
-    func getFriends(completionBlock: @escaping ([User]) -> Void)  {
+    func getFriends(completionBlock: @escaping () -> Void)  {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -42,11 +46,11 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                completionBlock(value.response?.users ?? [])
+                self.addObjects(array: value.response?.users ?? [])
             case .failure(let error):
                 print(error)
-                completionBlock([])
             }
+            completionBlock()
         }
     }
     
@@ -75,7 +79,7 @@ class Session {
         }
     }
     
-    func getGroups(completionBlock: @escaping ([Group]) -> Void)  {
+    func getGroups(completionBlock: @escaping () -> Void)  {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -91,11 +95,11 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                completionBlock(value.response?.groups ?? [])
+                self.addObjects(array: value.response?.groups ?? [])
             case .failure(let error):
                 print(error)
-                completionBlock([])
             }
+            completionBlock()
         }
     }
     
@@ -120,6 +124,49 @@ class Session {
                 print(error)
                 completionBlock([])
             }
+        }
+    }
+    
+    // MARK: - Realm
+    func getObjects(type: Object.Type) -> Results<Object> {
+        do {
+            return try Realm().objects(type)
+        } catch {
+            print(error)
+            return try! Realm().objects(type)
+        }
+    }
+    
+    func addObjects(array: Array<Object>)   {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(array, update: .all)
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func deleteAll()  {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.deleteAll()
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func deleteObject(object: Object) {
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.delete(object)
+            }
+        } catch {
+            print(error)
         }
     }
 }

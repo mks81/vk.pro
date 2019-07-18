@@ -8,19 +8,26 @@
 
 import UIKit
 import ObjectMapper
+import RealmSwift
 
-class User: Mappable {
-    var id: Int = 0
-    var photo: String = ""
-    var firstName: String = ""
-    var lastName: String = ""
+class User: Object, Mappable {
+    @objc dynamic var id: Int = 0
+    @objc dynamic var photo: String = ""
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
     
-    required init?(map: Map) {}
+    required convenience init?(map: Map) {
+        self.init()
+    }
     
     func mapping(map: Map) {
         id <- map["id"]
         photo <- map["photo_50"]
         firstName <- map["first_name"]
         lastName <- map["last_name"]
+    }
+    
+    override static func primaryKey() -> String? {
+        return "id"
     }
 }
