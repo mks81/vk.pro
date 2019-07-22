@@ -12,7 +12,6 @@ import RealmSwift
 
 class FriendsViewController: UITableViewController, UISearchBarDelegate {
     
-    var sectionsHashes: [Int: Int] = [:]
     var tokens = [NotificationToken?]()
     var items = [Results<Object>]()
     var users: Results<Object>!
@@ -26,7 +25,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
             self?.users = Session.instance.getObjects(type: User.self).filter("firstName != 'DELETED'").sorted(byKeyPath: "lastName")
             var alphabetIndex = 0
             var token: NotificationToken?
-            repeat {
+            for section in 0...1000 {
                 if alphabetIndex >= (self?.users.count)! { break }
                 let char = String((self?.users[alphabetIndex] as! User).lastName.first!)
                 self?.titlesForSections.append(char)
@@ -34,27 +33,26 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
                 alphabetIndex += (self?.items.last?.count)!
                 token = self?.items.last?.observe({ (changes) in
                     guard let tableView = self?.tableView else { return }
-                    let section = self?.sectionsHashes[token.hashValue]
-                    //print(section)
+                    print(section)
                     switch changes {
                     case .initial:
                         tableView.reloadData()
                     case .update(_, let deletions, let insertions, let modifications):
                         tableView.beginUpdates()
-                        tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: section!) }),
+                        tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: section) }),
                                              with: .automatic)
-                        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: section!)}),
+                        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: section)}),
                                              with: .automatic)
-                        tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: section!) }),
+                        tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: section) }),
                                              with: .automatic)
                         tableView.endUpdates()
                     case .error(let error):
                         fatalError("\(error)")
                     }
                 })
-                self?.sectionsHashes[token.hashValue] = (self?.items.count)! - 1
                 self?.tokens.append(token)
-            } while alphabetIndex < (self?.users.count)!
+                if alphabetIndex == (self?.users.count)! { break }
+            }
         }
     }
     
