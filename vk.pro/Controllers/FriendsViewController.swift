@@ -16,10 +16,10 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     var items = [Results<Object>]()
     var users: Results<Object>!
     var titlesForSections = [String]()
+    var filtered: Results<Object>!
     
     var searchActive = false
-    var filtered = [User]()
-    
+
     func prepareData() {
         DispatchQueue.global().sync { [weak self] in
             self?.users = Session.instance.getObjects(type: User.self).filter("firstName != 'DELETED'").sorted(byKeyPath: "lastName")
@@ -102,7 +102,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = self.users.filter("lastName CONTAINS '\(searchText)' OR firstName CONTAINS '\(searchText)'").toArray(ofType: User.self)
+        filtered = self.users.filter("lastName CONTAINS '\(searchText)' OR firstName CONTAINS '\(searchText)'")
         
         searchActive = searchText.count == 0 ? false : true
         tableView.reloadData()
@@ -138,7 +138,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         
         let section = indexPath.section
         let row = indexPath.row
-        let friend = searchActive ? filtered[row] : items[section][row] as! User
+        let friend = searchActive ? filtered[row] as! User : items[section][row] as! User
         cell.name.text = "\(friend.firstName) \(friend.lastName)"
         cell.photo!.sd_setImage(with: URL(string: friend.photo), placeholderImage: UIImage(named: "vk"))
         
@@ -162,7 +162,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         let indexPath = tableView.indexPath(for: cell)
         let section = indexPath!.section
         let row = indexPath!.row
-        let friend = searchActive ? filtered[row] : items[section][row] as! User
+        let friend = searchActive ? filtered[row] as! User : items[section][row] as! User
         let userId = friend.id
         photoViewController.ownerId = userId
     }
