@@ -12,45 +12,56 @@ import RealmSwift
 
 class FriendsViewController: UITableViewController, UISearchBarDelegate {
     
-    var friends: [User] = []
-    
-    var titleForSection = [String]()
-    var items = [[User]]()
+    var sectionsHashes: [Int: Int] = [:]
+    var tokens = [NotificationToken?]()
+    var items = [Results<Object>]()
+    var users: Results<Object>!
+    var titlesForSections = [String]()
     
     var searchActive = false
     var filtered = [User]()
-
-    func getData() {
-        DispatchQueue.global().async {
-            Session.instance.getFriends { [weak self] in
-                self?.friends = Session.instance.getObjects(type: User.self).filter("firstName != 'DELETED'").sorted(byKeyPath: "lastName").toArray(ofType: User.self) as [User]
-                self?.prepareData()
-            }
+    
+    func prepareData() {
+        DispatchQueue.global().sync { [weak self] in
+            self?.users = Session.instance.getObjects(type: User.self).filter("firstName != 'DELETED'").sorted(byKeyPath: "lastName")
+            var alphabetIndex = 0
+            var token: NotificationToken?
+            repeat {
+                if alphabetIndex >= (self?.users.count)! { break }
+                let char = String((self?.users[alphabetIndex] as! User).lastName.first!)
+                self?.titlesForSections.append(char)
+                self?.items.append((self?.users.filter("lastName BEGINSWITH %@", char))!)
+                alphabetIndex += (self?.items.last?.count)!
+                token = self?.items.last?.observe({ (changes) in
+                    guard let tableView = self?.tableView else { return }
+                    let section = self?.sectionsHashes[token.hashValue]
+                    //print(section)
+                    switch changes {
+                    case .initial:
+                        tableView.reloadData()
+                    case .update(_, let deletions, let insertions, let modifications):
+                        tableView.beginUpdates()
+                        tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: section!) }),
+                                             with: .automatic)
+                        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: section!)}),
+                                             with: .automatic)
+                        tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: section!) }),
+                                             with: .automatic)
+                        tableView.endUpdates()
+                    case .error(let error):
+                        fatalError("\(error)")
+                    }
+                })
+                self?.sectionsHashes[token.hashValue] = (self?.items.count)! - 1
+                self?.tokens.append(token)
+            } while alphabetIndex < (self?.users.count)!
         }
     }
     
-    func prepareData() {
-        items = [[User]]()
-        titleForSection = [String]()
-        var section = 0
-        titleForSection.append(String(friends[0].lastName.first ?? friends[0].firstName.first!))
-        items.append([User]())
-        items[section].append(friends[0])
-        
-        for row in 1..<friends.count {
-            let leftValue = friends[row - 1].lastName.first ?? friends[row - 1].firstName.first
-            let rightValue = friends[row].lastName.first ?? friends[row].firstName.first
-            if leftValue == rightValue {
-                items[section].append(friends[row])
-            } else {
-                titleForSection.append(String(rightValue!))
-                section += 1
-                items.append([User]())
-                items[section].append(friends[row])
-            }
+    deinit {
+        for token in tokens {
+            token?.invalidate()
         }
-        refreshControl?.endRefreshing()
-        tableView.reloadData()
     }
     
     func createRefreshControl() {
@@ -62,11 +73,17 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         super.viewDidLoad()
         
         createRefreshControl()
-        getData()
+        DispatchQueue.global().async {
+            Session.instance.getFriends { [weak self] in
+                self?.prepareData()
+            }
+        }
     }
-
+    
     @objc func refresh(refreshControl: UIRefreshControl) {
-        getData()
+        Session.instance.getFriends { [weak self] in
+            self?.refreshControl?.endRefreshing()
+        }
     }
     
     // MARK: - SearchBar delegate
@@ -88,28 +105,28 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = friends.filter { $0.firstName.lowercased().contains(searchText.lowercased()) || $0.lastName.lowercased().contains(searchText.lowercased())}
+        filtered = []// friends.filter { $0.firstName.lowercased().contains(searchText.lowercased()) || $0.lastName.lowercased().contains(searchText.lowercased())}
         
         searchActive = searchText.count == 0 ? false : true
         tableView.reloadData()
     }
     
     // MARK: - Table view data source
-
+    
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return searchActive ? nil : titleForSection
+        return searchActive ? nil : titlesForSections
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return searchActive ? 1 : titleForSection.count
+        return searchActive ? 1 : titlesForSections.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return searchActive ? filtered.count : items[section].count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return searchActive ? nil : String(titleForSection[section])
+        return searchActive ? nil : String(titlesForSections[section])
     }
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -124,7 +141,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         
         let section = indexPath.section
         let row = indexPath.row
-        let friend = searchActive ? filtered[row] : items[section][row]
+        let friend = searchActive ? filtered[row] : items[section][row] as! User
         cell.name.text = "\(friend.firstName) \(friend.lastName)"
         cell.photo!.sd_setImage(with: URL(string: friend.photo), placeholderImage: UIImage(named: "vk"))
         
@@ -132,7 +149,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
+        
         cell.transform = CGAffineTransform(translationX: 100, y: 0)
         UIView.animate(withDuration: 0.4, delay: 0, options: [.curveEaseOut], animations: {
             cell.transform = CGAffineTransform(translationX: -100, y: 0)
@@ -140,7 +157,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     }
     
     // MARK: - Navigation
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let photoViewController = segue.destination as! PhotoViewController
@@ -148,7 +165,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
         let indexPath = tableView.indexPath(for: cell)
         let section = indexPath!.section
         let row = indexPath!.row
-        let friend = searchActive ? filtered[row] : items[section][row]
+        let friend = searchActive ? filtered[row] : items[section][row] as! User
         let userId = friend.id
         photoViewController.ownerId = userId
     }
@@ -166,3 +183,4 @@ extension Results {
         return array
     }
 }
+
