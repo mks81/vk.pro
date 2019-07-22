@@ -51,7 +51,6 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
                     }
                 })
                 self?.tokens.append(token)
-                if alphabetIndex == (self?.users.count)! { break }
             }
         }
     }
@@ -103,7 +102,7 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filtered = []// friends.filter { $0.firstName.lowercased().contains(searchText.lowercased()) || $0.lastName.lowercased().contains(searchText.lowercased())}
+        filtered = self.users.filter("lastName CONTAINS '\(searchText)' OR firstName CONTAINS '\(searchText)'").toArray(ofType: User.self)
         
         searchActive = searchText.count == 0 ? false : true
         tableView.reloadData()
