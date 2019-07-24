@@ -61,8 +61,9 @@ class loginController: UIViewController, WKNavigationDelegate {
         }
         
         guard let token = params["access_token"] else { return }
-        
+        guard let userId = params["user_id"] else { return }
         Session.instance.token = token
+        Session.instance.userId = Int(userId)!
         
         decisionHandler(.cancel)
         

@@ -11,5 +11,9 @@ target 'vk.pro' do
   pod 'SDWebImage', '~> 5.0'
   pod 'SwiftKeychainWrapper'
   pod 'RealmSwift'
+  #pod 'Firebase/Core'
+  #pod 'Firebase/Firestore'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Database'
 
 end
