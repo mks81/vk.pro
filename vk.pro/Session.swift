@@ -75,7 +75,7 @@ class Session {
             switch result {
             case .success(let value):
                 Session.instance.user = value.users.first
-                Session.instance.addObgectToFirebase(object: Session.instance.user)
+                Session.instance.addUserFB()
             case .failure(let error):
                 print(error)
             }
@@ -200,15 +200,19 @@ class Session {
     
     // MARK: - Firebase QUERYS
     
-    func addObgectToFirebase(object: Object) {
-        switch object {
-        case let user as User:
-            let databaseRef = Database.database().reference()
-            guard let key = databaseRef.child("\(user.id)").key else { return }
-            let childUpdates = ["users/\(key)/": user.toJSON()]
-            databaseRef.updateChildValues(childUpdates)
-        default:
-            break
+    func addUserFB() {
+        let databaseRef = Database.database().reference()
+        for (key, value) in user.toJSON() {
+            if key == "id" { continue }
+            databaseRef.child("users/\(userId)/\(key)").setValue(value)
+        }
+    }
+    
+    func addGroupToUserFB(group: Group) {
+        let databaseRef = Database.database().reference()
+        for (key, value) in group.toJSON() {
+            if key == "id" { continue }
+            databaseRef.child("users/\(userId)/join_groups/\(group.id)/\(key)").setValue(value)
         }
     }
 }
