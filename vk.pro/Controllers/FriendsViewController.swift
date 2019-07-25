@@ -21,37 +21,34 @@ class FriendsViewController: UITableViewController, UISearchBarDelegate {
     var searchActive = false
 
     func prepareData() {
-        DispatchQueue.global().sync { [weak self] in
-            self?.users = Session.instance.getObjects(type: User.self).filter("firstName != 'DELETED'").sorted(byKeyPath: "lastName")
-            var alphabetIndex = 0
-            var token: NotificationToken?
-            for section in 0...1000 {
-                if alphabetIndex >= (self?.users.count)! { break }
-                let char = String((self?.users[alphabetIndex] as! User).lastName.first!)
-                self?.titlesForSections.append(char)
-                self?.items.append((self?.users.filter("lastName BEGINSWITH %@", char))!)
-                alphabetIndex += (self?.items.last?.count)!
-                token = self?.items.last?.observe({ (changes) in
-                    guard let tableView = self?.tableView else { return }
-                    print(section)
-                    switch changes {
-                    case .initial:
-                        tableView.reloadData()
-                    case .update(_, let deletions, let insertions, let modifications):
-                        tableView.beginUpdates()
-                        tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: section) }),
-                                             with: .automatic)
-                        tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: section)}),
-                                             with: .automatic)
-                        tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: section) }),
-                                             with: .automatic)
-                        tableView.endUpdates()
-                    case .error(let error):
-                        fatalError("\(error)")
-                    }
-                })
-                self?.tokens.append(token)
-            }
+        self.users = Session.instance.getObjects(type: User.self).filter("firstName != 'DELETED'").sorted(byKeyPath: "lastName")
+        var alphabetIndex = 0
+        var token: NotificationToken?
+        for section in 0...1000 {
+            if alphabetIndex >= (self.users.count) { break }
+            let char = String((self.users[alphabetIndex] as! User).lastName.first!)
+            self.titlesForSections.append(char)
+            self.items.append((self.users.filter("lastName BEGINSWITH %@", char)))
+            alphabetIndex += (self.items.last?.count)!
+            token = self.items.last?.observe({ (changes) in
+                guard let tableView = self.tableView else { return }
+                switch changes {
+                case .initial:
+                    tableView.reloadData()
+                case .update(_, let deletions, let insertions, let modifications):
+                    tableView.beginUpdates()
+                    tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: section) }),
+                                         with: .automatic)
+                    tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: section)}),
+                                         with: .automatic)
+                    tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: section) }),
+                                         with: .automatic)
+                    tableView.endUpdates()
+                case .error(let error):
+                    fatalError("\(error)")
+                }
+            })
+            self.tokens.append(token)
         }
     }
     

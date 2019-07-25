@@ -10,9 +10,11 @@ import UIKit
 import Alamofire
 import SwiftKeychainWrapper
 import RealmSwift
+import FirebaseDatabase
 
 class Session {
     static let instance = Session()
+    var user: User!
     
     var token: String = "" {
         didSet {
@@ -21,6 +23,7 @@ class Session {
     }
     var userId: Int = 0  {
         didSet {
+            getUser(id: Session.instance.userId)
             UserDefaults.standard.set(userId, forKey: "userId")
         }
     }
@@ -29,6 +32,8 @@ class Session {
         deleteAll()
         //print(realm.configuration.fileURL)
     }
+    
+    // MARK: - VK QUERYS
     
     func getFriends(completionBlock: @escaping () -> Void)  {
         
@@ -41,7 +46,6 @@ class Session {
             URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.95")
         ]
-        
         AF.request(urlComponents).responseObject { (vkResponse: DataResponse<VKResponse>) in
             let result = vkResponse.result
             switch result {
@@ -51,6 +55,30 @@ class Session {
                 print(error)
             }
             completionBlock()
+        }
+    }
+    
+    func getUser(id: Int)  {
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/users.get"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "user_ids", value: "\(Session.instance.userId)"),
+            URLQueryItem(name: "fields", value: "id,photo_50,first_name,last_name"),
+            URLQueryItem(name: "access_token", value: token),
+            URLQueryItem(name: "v", value: "5.101")
+        ]
+        AF.request(urlComponents).responseObject { (vkResponse: DataResponse<VKRootResponse>) in
+            let result = vkResponse.result
+            switch result {
+            case .success(let value):
+                Session.instance.user = value.users.first
+                Session.instance.addUserFB()
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
@@ -167,6 +195,24 @@ class Session {
             }
         } catch {
             print(error)
+        }
+    }
+    
+    // MARK: - Firebase QUERYS
+    
+    func addUserFB() {
+        let databaseRef = Database.database().reference()
+        for (key, value) in user.toJSON() {
+            if key == "id" { continue }
+            databaseRef.child("users/\(userId)/\(key)").setValue(value)
+        }
+    }
+    
+    func addGroupToUserFB(group: Group) {
+        let databaseRef = Database.database().reference()
+        for (key, value) in group.toJSON() {
+            if key == "id" { continue }
+            databaseRef.child("users/\(userId)/join_groups/\(group.id)/\(key)").setValue(value)
         }
     }
 }

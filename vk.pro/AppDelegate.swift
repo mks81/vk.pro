@@ -9,7 +9,7 @@
 
 
 import UIKit
-
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,8 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.barTintColor = UIColorFromHex(rgbValue: 0x4c75a3)
         navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
-        //Temp
-        //_ = Session.instance
+        FirebaseApp.configure()
         
         return true
     }

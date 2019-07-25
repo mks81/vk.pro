@@ -45,6 +45,13 @@ class GroupViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let group = groups[1][indexPath.row]
+            Session.instance.addGroupToUserFB(group: group)
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return searchActive && section == 1 ? "Глобальный поиск" : nil
     }
