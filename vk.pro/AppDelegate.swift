@@ -10,6 +10,7 @@
 
 import UIKit
 import Firebase
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -32,6 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         FirebaseApp.configure()
+        Realm.Configuration.defaultConfiguration.deleteRealmIfMigrationNeeded = true
+//                do {
+//                    print(try Realm().configuration.fileURL)
+//                } catch {
+//
+//                }
         
         return true
     }

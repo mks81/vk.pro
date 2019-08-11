@@ -30,7 +30,14 @@ class Session {
         
     private init() {
         deleteAll()
-        //print(realm.configuration.fileURL)
+        
+        
+        //Realm.Configuration.defaultConfiguration.(deleteRealmIfMigrationNeeded: true)
+//        do {
+//            print(try Realm().configuration.fileURL)
+//        } catch {
+//
+//        }
     }
     
     // MARK: - VK QUERYS

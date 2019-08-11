@@ -23,6 +23,7 @@ class VKResponseInternal: Mappable {
     var groups: [Group] = []
     var users: [User] = []
     var photos: [Photo] = []
+    var news: [News] = []
     
     required init?(map: Map) {}
     
@@ -30,5 +31,6 @@ class VKResponseInternal: Mappable {
         groups <- map["items"]
         users <- map["items"]
         photos <- map["items"]
+        news <- map["items"]
     }
 }
