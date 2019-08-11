@@ -17,6 +17,7 @@
 		0520C9F1229018E500C04D76 /* GroupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0520C9F0229018E500C04D76 /* GroupCell.swift */; };
 		05575CCE22FC202500B949A4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05575CCD22FC202500B949A4 /* GoogleService-Info.plist */; };
 		05575CD022FC4F1800B949A4 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05575CCF22FC4F1800B949A4 /* News.swift */; };
+		05575CD223003C0000B949A4 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05575CD123003C0000B949A4 /* NewsViewController.swift */; };
 		057E335722B7AB1A00E86EAB /* PhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E335622B7AB1A00E86EAB /* PhotoController.swift */; };
 		057E335B22BB69C200E86EAB /* CustomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E335A22BB69C200E86EAB /* CustomAnimator.swift */; };
 		057E335D22BB845300E86EAB /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057E335C22BB845300E86EAB /* CustomNavigationController.swift */; };
@@ -30,7 +31,6 @@
 		059E19B72295283E00651FF2 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059E19B62295283E00651FF2 /* UserModel.swift */; };
 		05AAE6DF22CCC59900A84E2B /* loginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AAE6DE22CCC59900A84E2B /* loginController.swift */; };
 		05BE3AB522A950DB00A59A8D /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3AB422A950DB00A59A8D /* NewsCell.swift */; };
-		05BE3AB722A95F3300A59A8D /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3AB622A95F3300A59A8D /* NewsViewController.swift */; };
 		05BE3ABB22AA52C200A59A8D /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3ABA22AA52C200A59A8D /* NewsModel.swift */; };
 		05BE3ADE22C556D100A59A8D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05BE3ADD22C556D100A59A8D /* Session.swift */; };
 		05C76AE222D0875C0080D583 /* VKResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C76AE122D0875C0080D583 /* VKResponse.swift */; };
@@ -52,6 +52,7 @@
 		0520C9F0229018E500C04D76 /* GroupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupCell.swift; sourceTree = "<group>"; };
 		05575CCD22FC202500B949A4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		05575CCF22FC4F1800B949A4 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		05575CD123003C0000B949A4 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		057E335622B7AB1A00E86EAB /* PhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoController.swift; sourceTree = "<group>"; };
 		057E335A22BB69C200E86EAB /* CustomAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnimator.swift; sourceTree = "<group>"; };
 		057E335C22BB845300E86EAB /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
@@ -67,7 +68,6 @@
 		059E19B62295283E00651FF2 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		05AAE6DE22CCC59900A84E2B /* loginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginController.swift; sourceTree = "<group>"; };
 		05BE3AB422A950DB00A59A8D /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
-		05BE3AB622A95F3300A59A8D /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		05BE3ABA22AA52C200A59A8D /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		05BE3ADD22C556D100A59A8D /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		05C76AE122D0875C0080D583 /* VKResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKResponse.swift; sourceTree = "<group>"; };
@@ -106,9 +106,9 @@
 				0520C9EB2290129900C04D76 /* GroupViewController.swift */,
 				0520C9E92290113800C04D76 /* FriendsViewController.swift */,
 				050555B322973200002B0575 /* PhotoViewController.swift */,
-				05BE3AB622A95F3300A59A8D /* NewsViewController.swift */,
 				057E335622B7AB1A00E86EAB /* PhotoController.swift */,
 				05AAE6DE22CCC59900A84E2B /* loginController.swift */,
+				05575CD123003C0000B949A4 /* NewsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -368,7 +368,6 @@
 				05C76AE422D08ABE0080D583 /* Group.swift in Sources */,
 				059E19B72295283E00651FF2 /* UserModel.swift in Sources */,
 				05C76AE822D0D4A80080D583 /* Photo.swift in Sources */,
-				05BE3AB722A95F3300A59A8D /* NewsViewController.swift in Sources */,
 				057E335F22BCAE3D00E86EAB /* CustomRefreshControl.swift in Sources */,
 				05C76AE222D0875C0080D583 /* VKResponse.swift in Sources */,
 				0520C9EC2290129900C04D76 /* GroupViewController.swift in Sources */,
@@ -377,6 +376,7 @@
 				05EF040222FBF9D200B67394 /* VKRootResponse.swift in Sources */,
 				05BE3ABB22AA52C200A59A8D /* NewsModel.swift in Sources */,
 				0520C9EF229018BF00C04D76 /* UserCell.swift in Sources */,
+				05575CD223003C0000B949A4 /* NewsViewController.swift in Sources */,
 				0520C9F1229018E500C04D76 /* GroupCell.swift in Sources */,
 				057E335B22BB69C200E86EAB /* CustomAnimator.swift in Sources */,
 				0520C9EA2290113800C04D76 /* FriendsViewController.swift in Sources */,

@@ -14,7 +14,7 @@ class News: Object, Mappable {
     @objc dynamic var sourceId: Int = 0
     @objc dynamic var type: String = ""
     @objc dynamic var date: Int = 0
-    @objc dynamic var postType: String = ""
+    //@objc dynamic var postType: String = ""
     @objc dynamic var text: String = ""
     
     required convenience init?(map: Map) {
@@ -23,11 +23,17 @@ class News: Object, Mappable {
     
     func mapping(map: Map) {
         //type post
-        sourceId <- map["source_id"]
         type <- map["type"]
-        date <- map["date"]
-        postType <- map["post_type"]
-        text <- map["text"]
+        switch type {
+        case "post":
+            sourceId <- map["source_id"]
+            date <- map["date"]
+            //postType <- map["post_type"]
+            text <- map["text"]
+        default:
+            return
+        }
+
     }
     
     override static func primaryKey() -> String? {

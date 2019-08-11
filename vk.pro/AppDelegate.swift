@@ -34,11 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FirebaseApp.configure()
         Realm.Configuration.defaultConfiguration.deleteRealmIfMigrationNeeded = true
-//                do {
-//                    print(try Realm().configuration.fileURL)
-//                } catch {
-//
-//                }
         
         return true
     }

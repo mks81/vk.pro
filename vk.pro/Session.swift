@@ -89,6 +89,31 @@ class Session {
         }
     }
     
+    func getNews(completionBlock: @escaping () -> Void)  {
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/newsfeed.get"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "filters", value: "post"),
+            URLQueryItem(name: "access_token", value: token),
+            URLQueryItem(name: "v", value: "5.101")
+        ]
+        print(urlComponents)
+        AF.request(urlComponents).responseObject { (vkResponse: DataResponse<VKResponse>) in
+            let result = vkResponse.result
+            switch result {
+            case .success(let value):
+                print(value.response)
+                self.addObjects(array: value.response?.news ?? [])
+            case .failure(let error):
+                print(error)
+            }
+            completionBlock()
+        }
+    }
+    
     func getPhotos(ownerId: Int, completionBlock: @escaping ([Photo]) -> Void) {
         
         var urlComponents = URLComponents()

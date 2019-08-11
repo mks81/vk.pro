@@ -8,11 +8,15 @@
 
 import UIKit
 
-class NewsCell: UICollectionViewCell {
+class NewsCell: UITableViewCell {
     
-    @IBOutlet weak var avatar: UIImageView!
-    @IBOutlet weak var photo: UIImageView!
-    @IBOutlet weak var text: UILabel!
+    static let reuseId = "NewsCell"
+    
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var date: UILabel!
+    //    @IBOutlet weak var avatar: UIImageView!
+//    @IBOutlet weak var photo: UIImageView!
+//    @IBOutlet weak var text: UILabel!
+//    @IBOutlet weak var name: UILabel!
     
 }
