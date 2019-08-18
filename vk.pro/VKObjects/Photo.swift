@@ -6,7 +6,6 @@
 //  Copyright © 2019 Nikota. All rights reserved.
 //
 
-import UIKit
 import ObjectMapper
 
 class Photo: Mappable {

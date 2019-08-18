@@ -6,20 +6,23 @@
 //  Copyright © 2019 Nikota. All rights reserved.
 //
 
-import UIKit
 import ObjectMapper
 
 class VKResponse: Mappable {
-    var response: VKResponseInternal? = nil
+    var items: VKResponseItems? = nil
+    var users: [User] = []
+    var group: [Group] = []
     
     required init?(map: Map) {}
     
     func mapping(map: Map) {
-        response <- map["response"]
+        items <- map["response"]
+        users <- map["response"]
+        group <- map["response"]
     }
 }
 
-class VKResponseInternal: Mappable {
+class VKResponseItems: Mappable {
     var groups: [Group] = []
     var users: [User] = []
     var photos: [Photo] = []

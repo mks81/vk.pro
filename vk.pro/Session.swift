@@ -6,7 +6,6 @@
 //  Copyright © 2019 Nikota. All rights reserved.
 //
 
-import UIKit
 import Alamofire
 import SwiftKeychainWrapper
 import RealmSwift
@@ -23,7 +22,7 @@ class Session {
     }
     var userId: Int = 0  {
         didSet {
-            getUser(id: Session.instance.userId)
+            getUser(id: Session.instance.userId) { _ in }
             UserDefaults.standard.set(userId, forKey: "userId")
         }
     }
@@ -57,7 +56,7 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                self.addObjects(array: value.response?.users ?? [])
+                self.addObjects(array: value.items?.users ?? [])
             case .failure(let error):
                 print(error)
             }
@@ -65,31 +64,36 @@ class Session {
         }
     }
     
-    func getUser(id: Int)  {
+    func getUser(id: Int, completion: @escaping (User) -> Void)  {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "api.vk.com"
         urlComponents.path = "/method/users.get"
         urlComponents.queryItems = [
-            URLQueryItem(name: "user_ids", value: "\(Session.instance.userId)"),
+            URLQueryItem(name: "user_ids", value: "\(id)"),
             URLQueryItem(name: "fields", value: "id,photo_50,first_name,last_name"),
             URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.101")
         ]
-        AF.request(urlComponents).responseObject { (vkResponse: DataResponse<VKRootResponse>) in
+        AF.request(urlComponents).responseObject { (vkResponse: DataResponse<VKResponse>) in
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                Session.instance.user = value.users.first
-                Session.instance.addUserFB()
+                if Session.instance.user == nil {
+                    Session.instance.user = value.users.first
+                    Session.instance.addUserFB()
+                }
+                //
+                completion(value.users.first ?? User())
             case .failure(let error):
                 print(error)
             }
+            completion(User())
         }
     }
     
-    func getNews(completionBlock: @escaping () -> Void)  {
+    func getNews(completionBlock: @escaping ([News]) -> Void)  {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -97,6 +101,7 @@ class Session {
         urlComponents.path = "/method/newsfeed.get"
         urlComponents.queryItems = [
             URLQueryItem(name: "filters", value: "post"),
+            URLQueryItem(name: "count", value: "10"),
             URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.101")
         ]
@@ -105,12 +110,13 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                print(value.response)
-                self.addObjects(array: value.response?.news ?? [])
+                //self.addObjects(array: value.items?.news ?? [])
+                completionBlock(value.items?.news ?? [])
+                break
             case .failure(let error):
                 print(error)
             }
-            completionBlock()
+            completionBlock([])
         }
     }
     
@@ -131,7 +137,7 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                completionBlock(value.response?.photos ?? [])
+                completionBlock(value.items?.photos ?? [])
             case .failure(let error):
                 print(error)
                 completionBlock([])
@@ -155,11 +161,35 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                self.addObjects(array: value.response?.groups ?? [])
+                self.addObjects(array: value.items?.groups ?? [])
             case .failure(let error):
                 print(error)
             }
             completionBlock()
+        }
+    }
+    
+    func getGroupById(id: Int, completionBlock: @escaping (Group) -> Void)  {
+        
+        var urlComponents = URLComponents()
+        urlComponents.scheme = "https"
+        urlComponents.host = "api.vk.com"
+        urlComponents.path = "/method/groups.get"
+        urlComponents.queryItems = [
+            URLQueryItem(name: "group_id", value: "\(id)"),
+            URLQueryItem(name: "access_token", value: token),
+            URLQueryItem(name: "v", value: "5.101")
+        ]
+        
+        AF.request(urlComponents).responseObject { (vkResponse: DataResponse<VKResponse>) in
+            let result = vkResponse.result
+            switch result {
+            case .success(let value):
+                completionBlock(value.group.first ?? Group())
+            case .failure(let error):
+                print(error)
+            }
+            completionBlock(Group())
         }
     }
     
@@ -179,7 +209,7 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                completionBlock(value.response?.groups ?? [])
+                completionBlock(value.items?.groups ?? [])
             case .failure(let error):
                 print(error)
                 completionBlock([])

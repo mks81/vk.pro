@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -37,7 +37,6 @@
 		05C76AE422D08ABE0080D583 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C76AE322D08ABE0080D583 /* Group.swift */; };
 		05C76AE622D097AC0080D583 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C76AE522D097AC0080D583 /* User.swift */; };
 		05C76AE822D0D4A80080D583 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C76AE722D0D4A80080D583 /* Photo.swift */; };
-		05EF040222FBF9D200B67394 /* VKRootResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05EF040122FBF9D100B67394 /* VKRootResponse.swift */; };
 		DA760F7047335B58402F5749 /* Pods_vk_pro.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 243232ED6FD6191FE69C26D9 /* Pods_vk_pro.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,7 +73,6 @@
 		05C76AE322D08ABE0080D583 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		05C76AE522D097AC0080D583 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		05C76AE722D0D4A80080D583 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
-		05EF040122FBF9D100B67394 /* VKRootResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKRootResponse.swift; sourceTree = "<group>"; };
 		07BC6FB4A50E1766BE2B9634 /* Pods-vk.pro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk.pro.debug.xcconfig"; path = "Target Support Files/Pods-vk.pro/Pods-vk.pro.debug.xcconfig"; sourceTree = "<group>"; };
 		243232ED6FD6191FE69C26D9 /* Pods_vk_pro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_vk_pro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		679ABA5B8B90227E7F8C1958 /* Pods-vk.pro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-vk.pro.release.xcconfig"; path = "Target Support Files/Pods-vk.pro/Pods-vk.pro.release.xcconfig"; sourceTree = "<group>"; };
@@ -197,7 +195,6 @@
 			children = (
 				05C76AE122D0875C0080D583 /* VKResponse.swift */,
 				05575CCF22FC4F1800B949A4 /* News.swift */,
-				05EF040122FBF9D100B67394 /* VKRootResponse.swift */,
 				05C76AE322D08ABE0080D583 /* Group.swift */,
 				05C76AE522D097AC0080D583 /* User.swift */,
 				05C76AE722D0D4A80080D583 /* Photo.swift */,
@@ -320,34 +317,11 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vk.pro/Pods-vk.pro-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftKeychainWrapper/SwiftKeychainWrapper.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-vk.pro/Pods-vk.pro-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftKeychainWrapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-vk.pro/Pods-vk.pro-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -373,7 +347,6 @@
 				0520C9EC2290129900C04D76 /* GroupViewController.swift in Sources */,
 				05BE3AB522A950DB00A59A8D /* NewsCell.swift in Sources */,
 				050555BF229AF5C9002B0575 /* LikesControl.swift in Sources */,
-				05EF040222FBF9D200B67394 /* VKRootResponse.swift in Sources */,
 				05BE3ABB22AA52C200A59A8D /* NewsModel.swift in Sources */,
 				0520C9EF229018BF00C04D76 /* UserCell.swift in Sources */,
 				05575CD223003C0000B949A4 /* NewsViewController.swift in Sources */,
