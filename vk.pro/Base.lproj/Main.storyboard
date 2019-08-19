@@ -314,13 +314,25 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="412.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfJ-kQ-lw2">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LfJ-kQ-lw2" customClass="AvatarView" customModule="vk_pro" customModuleProvider="target">
                                             <rect key="frame" x="30" y="16" width="50" height="50"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j6C-0V-1gt">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="j6C-0V-1gt" secondAttribute="bottom" id="59h-W4-WYR"/>
+                                                <constraint firstItem="j6C-0V-1gt" firstAttribute="leading" secondItem="LfJ-kQ-lw2" secondAttribute="leading" id="CLw-Xj-m3N"/>
+                                                <constraint firstAttribute="trailing" secondItem="j6C-0V-1gt" secondAttribute="trailing" id="NEo-6V-CiO"/>
                                                 <constraint firstAttribute="width" constant="50" id="Pnm-J9-Xw3"/>
+                                                <constraint firstItem="j6C-0V-1gt" firstAttribute="top" secondItem="LfJ-kQ-lw2" secondAttribute="top" id="UD0-5G-and"/>
                                                 <constraint firstAttribute="height" constant="50" id="iIM-8r-dHJ"/>
                                             </constraints>
+                                            <connections>
+                                                <outlet property="imageView" destination="j6C-0V-1gt" id="L4C-VE-Ssy"/>
+                                            </connections>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vKj-6g-kf1">
                                             <rect key="frame" x="90" y="16" width="294" height="20"/>
@@ -355,6 +367,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="avatar" destination="j6C-0V-1gt" id="j26-I2-FvD"/>
                                     <outlet property="date" destination="tGx-Tc-Gi2" id="aNq-9I-RkM"/>
                                     <outlet property="name" destination="vKj-6g-kf1" id="DVv-hd-vaf"/>
                                 </connections>

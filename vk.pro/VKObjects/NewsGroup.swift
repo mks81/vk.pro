@@ -1,19 +1,19 @@
 //
-//  User.swift
+//  NewsGroup.swift
 //  vk.pro
 //
-//  Created by mks on 06/07/2019.
+//  Created by mks on 19/08/2019.
 //  Copyright © 2019 Nikota. All rights reserved.
 //
 
+import UIKit
 import ObjectMapper
 import RealmSwift
 
-class User: Object, Mappable {
+class NewsGroup: Object, Mappable {
     @objc dynamic var id: Int = 0
     @objc dynamic var photo: String = ""
-    @objc dynamic var firstName: String = ""
-    @objc dynamic var lastName: String = ""
+    @objc dynamic var name: String = ""
     
     required convenience init?(map: Map) {
         self.init()
@@ -22,8 +22,7 @@ class User: Object, Mappable {
     func mapping(map: Map) {
         id <- map["id"]
         photo <- map["photo_50"]
-        firstName <- map["first_name"]
-        lastName <- map["last_name"]
+        name <- map["name"]
     }
     
     override static func primaryKey() -> String? {

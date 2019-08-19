@@ -1,15 +1,15 @@
 //
-//  User.swift
+//  NewsProfile.swift
 //  vk.pro
 //
-//  Created by mks on 06/07/2019.
+//  Created by mks on 19/08/2019.
 //  Copyright © 2019 Nikota. All rights reserved.
 //
 
 import ObjectMapper
 import RealmSwift
 
-class User: Object, Mappable {
+class NewsProfile: Object, Mappable {
     @objc dynamic var id: Int = 0
     @objc dynamic var photo: String = ""
     @objc dynamic var firstName: String = ""
@@ -30,3 +30,4 @@ class User: Object, Mappable {
         return "id"
     }
 }
+

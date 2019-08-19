@@ -10,6 +10,8 @@ import ObjectMapper
 
 class VKResponse: Mappable {
     var items: VKResponseItems? = nil
+    var newsProfiles: VKResponseItems? = nil
+    var NewsGroups: VKResponseItems? = nil
     var users: [User] = []
     var group: [Group] = []
     
@@ -17,6 +19,8 @@ class VKResponse: Mappable {
     
     func mapping(map: Map) {
         items <- map["response"]
+        newsProfiles <- map["response"]
+        NewsGroups <- map["response"]
         users <- map["response"]
         group <- map["response"]
     }
@@ -27,6 +31,8 @@ class VKResponseItems: Mappable {
     var users: [User] = []
     var photos: [Photo] = []
     var news: [News] = []
+    var newsProfiles: [NewsProfile] = []
+    var newsGroups: [NewsGroup] = []
     
     required init?(map: Map) {}
     
@@ -35,5 +41,7 @@ class VKResponseItems: Mappable {
         users <- map["items"]
         photos <- map["items"]
         news <- map["items"]
+        newsProfiles <- map["profiles"]
+        newsGroups <- map["groups"]
     }
 }

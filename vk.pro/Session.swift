@@ -93,7 +93,7 @@ class Session {
         }
     }
     
-    func getNews(completionBlock: @escaping ([News]) -> Void)  {
+    func getNews(completionBlock: @escaping () -> Void)  {
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
@@ -101,7 +101,7 @@ class Session {
         urlComponents.path = "/method/newsfeed.get"
         urlComponents.queryItems = [
             URLQueryItem(name: "filters", value: "post"),
-            URLQueryItem(name: "count", value: "10"),
+            URLQueryItem(name: "count", value: "20"),
             URLQueryItem(name: "access_token", value: token),
             URLQueryItem(name: "v", value: "5.101")
         ]
@@ -110,13 +110,15 @@ class Session {
             let result = vkResponse.result
             switch result {
             case .success(let value):
-                //self.addObjects(array: value.items?.news ?? [])
-                completionBlock(value.items?.news ?? [])
+                self.addObjects(array: value.items?.news ?? [])
+                self.addObjects(array: value.newsProfiles?.newsProfiles ?? [])
+                self.addObjects(array: value.NewsGroups?.newsGroups ?? [])
+                //completionBlock(value.items?.news ?? [])
                 break
             case .failure(let error):
                 print(error)
             }
-            completionBlock([])
+            completionBlock()
         }
     }
     
