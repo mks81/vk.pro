@@ -71,11 +71,14 @@ class NewsViewController: UITableViewController {
             cell.avatar!.sd_setImage(with: URL(string: user.photo), placeholderImage: UIImage(named: "vk"))
             cell.name.text = "\(user.firstName) \(user.lastName)"
         }
-        //        cell.name.text = "\(friend.firstName) \(friend.lastName)"
-        //        cell.photo!.sd_setImage(with: URL(string: friend.photo), placeholderImage: UIImage(named: "vk"))
-        //cell.name.text = news.type
+        cell.newsText.text = news.text
+        cell.photo!.sd_setImage(with: URL(string: news.attachmentPhoto), placeholderImage: UIImage(named: "vk"))
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200
     }
     
 }
